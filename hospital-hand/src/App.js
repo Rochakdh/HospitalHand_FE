@@ -3,6 +3,11 @@ import 'semantic-ui-css/semantic.min.css'
 import { Container, Input } from 'semantic-ui-react';
 import View from './containers/View'
 
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import AllDoctors from './containers/AllDoctors';
+
+
+
 export default class App extends Component {
   state = {
     categories: [
@@ -155,20 +160,31 @@ export default class App extends Component {
     const { categories, results, query } = this.state
     const data = results.length === 0 && !query ? categories : results;
     return (
-      <div >
-        <Container >
-          <div style={{ paddingTop: 2 + "em" }}>
-            <h1 style={{ paddingLeft: 15 + "em" }}> Select The Category</h1>
-            <Input
-              icon="search"
-              placeholder="Search Department"
-              onChange={this.onSearchChange}
-            ></Input>
-            <View data={data}></View>
-          </div>
+      <Router>
 
-        </Container >
-      </div>
+        <div >
+          <Route path="/categories" component={View}>
+            <Container >
+              <div style={{ paddingTop: 2 + "em" }}>
+                <h1 style={{ paddingLeft: 15 + "em" }}> Select The Category</h1>
+                <Input
+                  icon="search"
+                  placeholder="Search Department"
+                  onChange={this.onSearchChange}
+                ></Input>
+                <View data={data}></View>
+
+              </div>
+
+            </Container >
+          </Route>
+
+          <Route path="/doctors" component={AllDoctors}>
+            
+          </Route>
+        </div>
+      </Router>
+
 
     )
   }

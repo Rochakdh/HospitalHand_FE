@@ -1,17 +1,50 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
+
 import Detail from './Detail.jsx'
 
+import { BrowserRouter as Link } from 'react-router-dom';
+
+
+
+
 export default class View extends Component {
+
 
     state = {
         isOpen: false,
         id: "",
     }
 
+    state = {
+        doctors: { name: '', department: '' }
+    }
+
     onDetailClick = (id, Category, More) => {
         this.setState({ isOpen: true, id: id, Category: Category, More: More });
     }
+
+
+    OnSeeDoctorsClick = (id) => {
+        console.log(id)
+
+        fetch('http://127.0.0.1:8000/categories/list/', {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' },
+
+        })
+
+            .then(data => data.json())
+            .then(
+                data => {
+                    console.log(data[id-1]);
+                }
+            )
+
+
+
+    }
+
 
     onClose = () => {
         this.setState({
@@ -19,11 +52,13 @@ export default class View extends Component {
         })
     }
 
+
     render() {
         const { data } = this.props
         const { isOpen, id, Category, More } = this.state
 
         return (
+
             <div>
 
                 <Detail data={data} isOpen={isOpen} onClose={this.onClose} id={id} Category={Category} More={More}></Detail>
@@ -63,7 +98,9 @@ export default class View extends Component {
                                     <Table.Cell textAlign="center">
                                         <Button content="Detail" onClick={this.onDetailClick.bind(this, categories.id, categories.Category, categories.More)}></Button>
 
-                                        <Button content="See Doctors"></Button>
+                                        <Link to="/doctors" > <Button content="See Doctors" onClick={this.OnSeeDoctorsClick.bind(this, categories.id)} />
+                                        </Link>
+
                                     </Table.Cell>
                                 </Table.Row>
 
@@ -74,6 +111,8 @@ export default class View extends Component {
 
                 </Table>
             </div>
+
+
         )
     }
 }
