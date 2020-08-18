@@ -1,27 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-// import App from './components/App';
+import App from './components/App';
 // import FixedMenuLayout from './components/notice'
 
-import Form from './noticeform'
 
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
-const Root= ()=>(
-  <Router>
-    <Switch>
-      <Route path="/" component={Form} />
-      
-    </Switch>
-  </Router>
-);
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

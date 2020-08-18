@@ -1,28 +1,28 @@
 import React from 'react'
 // import 'semantic-ui-css/semantic.min.css'
 
-class Form extends React.Component { 
+class noticeform extends React.Component { 
     state={
         credentials:{title:'',description:'',post_at:''}
     } 
 
     post=event=>{
         console.log('posted');
-        fetch('http://127.0.0.1:8000/notice/',{
-            method: 'POST',
+        fetch('http://127.0.0.1:8000/notice/list/',{
+            method: 'GET',
             header:{'Content-Type':'application/json'},
-            body:JSON.stringify(this.state.credentials)
+            // body:JSON.stringify(this.state.credentials)
         }).then(
             data=>{
                 console.log(data);
             }
         ).catch(error=>console.error(error))
     }
-    inputchanged= event=>{
-        const cred =this.state.credentials;
-        cred[event.target.name]=event.target.value;
-        this.setState({credentials:cred});
-    }
+    // inputchanged= event=>{
+    //     const cred =this.state.credentials;
+    //     cred[event.target.name]=event.target.value;
+    //     this.setState({credentials:cred});
+    // }
     render(){
         return(
             <div >
@@ -41,4 +41,4 @@ class Form extends React.Component {
         );
     }
 } 
-export default Form;   
+export default noticeform;   
