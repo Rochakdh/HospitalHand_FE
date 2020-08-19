@@ -1,0 +1,65 @@
+
+.backgroundImage{
+    background: url(containers/hospitalhand.jpg);
+	height: 540px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bgColor{
+    background-color: rgba(30,76,92,0.8);;
+	margin:0px;
+    height:540px;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 10vh;
+    background: transparent;
+    color: white;
+    font-size: large;
+    padding: 20px;
+}
+.nav-links{
+    width: 45%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin-left: 500px;
+}
+
+
+.nav-links a{
+    color: white;
+}
+.nav-links a:visited,.active{
+    background-color: #0cb8b6;
+    border-radius: 10px;
+    color:white;
+    padding :10px 10px;
+
+}
+
+.homeContent{
+    text-align: center;
+    color: white;
+    margin: 80px;
+    font-size: 18px;
+}
+.homeContent h1{
+    font-size: 40px;
+    padding: 0px;
+    margin-bottom: 30px;
+}
+.homeContent button{
+    font-size: 15px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    background: #0cb8b6;
+    color: white;
+    margin-top: 70px;
+}
+

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Container, Input } from 'semantic-ui-react';
 import View from './containers/View'
+import Home from './containers/Home'
+import './App.css'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AllDoctors from './containers/AllDoctors';
@@ -140,7 +142,6 @@ export default class App extends Component {
         More: "Wellness Center is a new concept for Nepal. It is a dedicated department for preventive health checkups and early identification and management of diseases. Various health checkup packages have been designed according to the needs of our clients. A team of Family Physicians do the initial workup and evaluation during the follow-up."
       }
     ],
-
     query: "",
     results: [],
   }
@@ -161,7 +162,6 @@ export default class App extends Component {
     const data = results.length === 0 && !query ? categories : results;
     return (
       <Router>
-
         <div >
           <Route path="/categories" component={View}>
             <Container >
@@ -182,6 +182,11 @@ export default class App extends Component {
           <Route path="/doctors" component={AllDoctors}>
             
           </Route>
+
+          <Route path='/' component={Home}>
+            <Home />
+          </Route>
+
         </div>
       </Router>
 
