@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
 import axios from "axios";
 
-import { API_URL } from "../constants";
+import { API_URL } from "./constants/index";
 
 
 class NewNoticeForm extends React.Component {
@@ -27,8 +27,8 @@ class NewNoticeForm extends React.Component {
     createnotice = e => {
       e.preventDefault();
       axios.post(API_URL, this.state).then(() => {
-        this.props.resetState();
-        this.props.toggle();
+        // this.props.resetState();
+        
       });
     };
   
@@ -61,7 +61,7 @@ class NewNoticeForm extends React.Component {
           </FormGroup>
           
           <FormGroup>
-            <Label for="post_at">Phone:</Label>
+            <Label for="post_at">Post at:</Label>
             <Input
               type="text"
               name="post_at"
