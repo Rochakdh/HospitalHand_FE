@@ -4,7 +4,7 @@ import { Container, Input } from 'semantic-ui-react';
 import View from './containers/View'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import AllDoctors from './containers/AllDoctors';
+import AddDoctors from './containers/AddDoctors';
 
 
 
@@ -179,7 +179,7 @@ export default class App extends Component {
             </Container >
           </Route>
 
-          <Route path="/doctors" component={AllDoctors}>
+          <Route path="/doctors/add" component={AddDoctors}>
             
           </Route>
         </div>

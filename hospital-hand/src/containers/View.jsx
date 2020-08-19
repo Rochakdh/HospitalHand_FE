@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 
 import Detail from './Detail.jsx'
+import AllDoctors from './AllDoctors'
+import Axios from 'axios';
 
-import { BrowserRouter as Link } from 'react-router-dom';
 
 
 
@@ -14,10 +15,9 @@ export default class View extends Component {
     state = {
         isOpen: false,
         id: "",
-    }
-
-    state = {
-        doctors: { name: '', department: '' }
+        doctors: [],
+        
+        
     }
 
     onDetailClick = (id, Category, More) => {
@@ -25,23 +25,21 @@ export default class View extends Component {
     }
 
 
-    OnSeeDoctorsClick = (id) => {
+    OnSeeDoctorsClick = (id, Category) => {
+        this.setState({ doctorOpen: true, id: id, Category: Category });
         console.log(id)
 
-        fetch('http://127.0.0.1:8000/categories/list/', {
-            method: "GET",
-            headers: { 'Content-Type': 'application/json' },
-
-        })
-
-            .then(data => data.json())
-            .then(
-                data => {
-                    console.log(data[id-1]);
-                }
-            )
-
-
+        Axios.get(`http://127.0.0.1:8000/categories/list/${id}/`)
+            .then(docs => {
+                this.setState({
+                    doctors: docs.data,
+                    
+                })
+                console.log(docs.data);
+                
+                
+               
+            })
 
     }
 
@@ -49,19 +47,22 @@ export default class View extends Component {
     onClose = () => {
         this.setState({
             isOpen: false,
+            doctorOpen: false
         })
     }
 
 
     render() {
         const { data } = this.props
-        const { isOpen, id, Category, More } = this.state
+        const { isOpen, doctors, doctorOpen, id, Category, More } = this.state
 
         return (
 
             <div>
 
                 <Detail data={data} isOpen={isOpen} onClose={this.onClose} id={id} Category={Category} More={More}></Detail>
+                <AllDoctors data={this.state.doctors} doctorOpen={doctorOpen} onClose={this.onClose} id={id} Category={Category} doctors={doctors} ></AllDoctors>
+
                 <Table sortable celled fixed>
                     <Table.Header>
                         <Table.Row>
@@ -98,8 +99,8 @@ export default class View extends Component {
                                     <Table.Cell textAlign="center">
                                         <Button content="Detail" onClick={this.onDetailClick.bind(this, categories.id, categories.Category, categories.More)}></Button>
 
-                                        <Link to="/doctors" > <Button content="See Doctors" onClick={this.OnSeeDoctorsClick.bind(this, categories.id)} />
-                                        </Link>
+                                        <Button content="See Doctors" onClick={this.OnSeeDoctorsClick.bind(this, categories.id, categories.Category)} />
+
 
                                     </Table.Cell>
                                 </Table.Row>
