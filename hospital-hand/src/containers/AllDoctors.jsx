@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, List, Button, Image, Dropdown } from 'semantic-ui-react';
+import { Modal, List, Button, Image } from 'semantic-ui-react';
 
 
 
@@ -11,6 +11,21 @@ export default class AllDoctors extends Component {
         console.log(this.props.id)
 
     }
+
+    selectedHospital = (item, index) => {
+
+
+        console.log(item, index)
+
+
+
+    }
+
+
+
+
+
+
     render() {
 
         const { doctorOpen } = this.props
@@ -34,28 +49,22 @@ export default class AllDoctors extends Component {
                                         </List.Content>
 
                                         <List.Content floated='right'>
-                                            <Dropdown selection>
-                                                <Dropdown.Menu>
+                                            <select>
 
-                                                    <Dropdown.Item>
-                                                        {doctors.hospital[0]}
+                                                {
+                                                    doctors.hospital.map((item, index) =>
+                                                        <option value={index} onClick={this.selectedHospital.bind(this, item, index)}>
 
-                                                    </Dropdown.Item>
+                                                            {item}
 
-                                                    <Dropdown.Item>
-                                                        {doctors.hospital[1]}
+                                                        </option>
 
-                                                    </Dropdown.Item>
-
-
-
-                                                </Dropdown.Menu>
-
-
-                                            </Dropdown>
+                                                    )
+                                                }
+                                            </select>
 
                                         </List.Content>
-                                        <Image avatar src='https://react.semantic-ui.com/images/avatar/small/lena.png' />
+                                        <Image avatar src='https://lh3.googleusercontent.com/proxy/QALDWmv3S9ylMSSB8LVx3Fl6NZEOtBFecl9_FKWJlp7CfC3sMaCJ8L1nDPPfgAFenqA3OKPqij26Uqj-JhNt2seCXW_JjMzg' />
                                         <List.Content>
                                             <strong style={{ paddingRight: 8 + "em" }}>{doctors.name}</strong> {doctors.experience} yrs. of Experience
                                     </List.Content>
