@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Container, Input } from 'semantic-ui-react';
-import View from './containers/View'
-import Home from './containers/Home'
+import View from './containers/View';
+import Home from './containers/Home';
+
 import './App.css'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AllDoctors from './containers/AllDoctors';
+import LoginForm from './containers/LoginForm';
+import Profile from './containers/Profile';
+import SignUp from './containers/SignUp';
 
 
 
@@ -183,12 +187,21 @@ export default class App extends Component {
             
           </Route>
 
-          <Route path='/' component={Home}>
+          <Route path='/' exact component={Home}>
             <Home />
           </Route>
-
+          <Route path='/login' component={LoginForm}>
+            <LoginForm />
+          </Route>
+          <Route path='/profile' exact component={Profile}>
+            <Profile />
+          </Route>
+          <Route path='/signup' exact component={SignUp}>
+            <SignUp />
+          </Route>
         </div>
       </Router>
+  
 
 
     )

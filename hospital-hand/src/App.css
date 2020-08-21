@@ -53,7 +53,7 @@ nav{
     padding: 0px;
     margin-bottom: 30px;
 }
-.homeContent button{
+.homme-btn{
     font-size: 15px;
     padding: 10px 30px;
     border-radius: 5px;
@@ -63,3 +63,38 @@ nav{
     margin-top: 70px;
 }
 
+.formfields{
+    width: 30%;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    height: 35px;
+    font-size: 15px;
+    padding: 15px;
+}
+
+.loginbtn{
+    font-size: 15px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    background: #0cb8b6;
+    color: white;
+    margin-top: 10px;
+}
+
+.error{
+    color: red;
+}
+
+.signupImage{
+    background: url(containers/signupcover.jpg);
+	height: 540px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mr-10{
+    margin: 5px;
+}

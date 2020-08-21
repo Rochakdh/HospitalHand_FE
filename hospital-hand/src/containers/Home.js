@@ -21,7 +21,7 @@ export default class Home extends Component {
                             <p>
                                 Book appointment to available doctor by Signing Up.
                             </p>
-                            <button type="submit">Make Appointment</button>
+                            <button type="submit" className="homme-btn">Make Appointment</button>
                         </div>
                     </div>
                 </div>

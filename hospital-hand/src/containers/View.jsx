@@ -111,8 +111,6 @@ export default class View extends Component {
 
                 </Table>
             </div>
-
-
         )
     }
 }
