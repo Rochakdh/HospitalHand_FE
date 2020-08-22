@@ -20,7 +20,6 @@ export default class AddDoctors extends Component {
 
 
             })
-
     }
     render() {
 
