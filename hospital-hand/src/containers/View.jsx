@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Form, Input, TextArea } from 'semantic-ui-react';
+import { Table, Button, Form } from 'semantic-ui-react';
 
 import Detail from './Detail.jsx'
 import AllDoctors from './AllDoctors'
@@ -62,9 +62,9 @@ export default class View extends Component {
 
                 <Detail data={data} isOpen={isOpen} onClose={this.onClose} id={id} Category={Category} More={More}></Detail>
                 <AllDoctors data={this.state.doctors} doctorOpen={doctorOpen} onClose={this.onClose} id={id} Category={Category} doctors={doctors} ></AllDoctors>
-                <Form action="/doctors/add/" style={{paddingLeft:70+"em"}}>
+                <Form action="/doctors/add/" style={{ paddingLeft: 70 + "em" }}>
 
-                <Button color="facebook">Add Doctor</Button>
+                    <Button color="facebook">Add Doctor</Button>
 
                 </Form>
                 <Table sortable celled fixed>
