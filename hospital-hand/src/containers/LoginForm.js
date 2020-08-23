@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Nav from './Nav'
 import {Redirect} from 'react-router-dom'
-import users from '../api/setup';
+import validation from '../api/setup';
 
 export default class LoginForm extends Component {
     constructor(props){
@@ -31,7 +31,7 @@ export default class LoginForm extends Component {
         console.log(this.state)
         e.preventDefault();
         const {username,password} = this.state
-        users.post('user/login/', {
+        validation.post('user/login/', {
             username: username,
             password: password,
           })
@@ -66,6 +66,7 @@ export default class LoginForm extends Component {
                         <div className='homeContent'>
                             <h1>Login</h1>
                             { this.state.errorMessage && <h4 className="error"> { this.state.errorMessage } </h4> }
+                            {/* { this.props.location.state.message && <h4 className="error"> { this.props.location.state.message } </h4> } */}
                             <form onSubmit={this.loginFormSubmit}>
                                 <input type="text" placeholder="user" name ="username" 
                                     className="formfields" value={this.state.username} 

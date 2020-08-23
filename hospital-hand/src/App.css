@@ -1,4 +1,7 @@
-
+ul, li{
+    margin: 0;
+    padding: 0;
+}
 .backgroundImage{
     background: url(containers/hospitalhand.jpg);
 	height: 540px;
@@ -97,4 +100,217 @@ nav{
 
 .mr-10{
     margin: 5px;
+}
+
+.flex-wrapper{
+    display:inline-flex;
+    width: 100%;
+    
+}
+.flex-child-nav{
+    background-color:rgb(37, 37, 37);
+    width: 20%;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.side-nav-links li, a:visited{
+    list-style-type: none;
+    text-align: center;
+    border-bottom: 1px white solid;
+    color: white;
+    padding: 20px 40px;
+    align-items: stretch;
+    
+}
+
+
+.side-nav-links li:hover{
+    background-color: #0cb8b6;
+}
+.flex-child-content{
+    width: 80%;
+    margin: 20px 30px;
+    height: 80px;
+    border-radius: 10px;
+    
+}
+
+.headig,.user-info,.user-appointment{
+    display: inline-flex;
+    margin:10px 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #0cb8b6;
+    border-radius: 5px;
+}
+.user-info,.user-appointment{
+    border-style: none ;
+}
+.profile{
+    margin-right: 30%;
+}
+.appointment{
+    margin-left: 30%;
+}
+.appointment-btn{
+   margin:0;
+}
+.user-profile-wrapper{
+    width: 100%;
+    flex: 1 0 100;
+}
+.bg-rm-ht{
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 0px;
+}
+.user-profie-content{
+    color: white;
+    padding: 10px 20px;
+}
+.profile-right{
+    margin-left: 20px;
+    border: 1px solid  #0cb8b6;
+    width: 60%;
+    padding: 20px;
+}
+.profile-pic{
+    width: 80%;
+    height: 180px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: auto;
+}
+.pending-appointment,.fixed-appointment{
+    padding: 10px 10px;
+    margin-top: 20px;
+}
+
+
+
+
+.profile-bg{
+    background-image: linear-gradient(to right,rgba(12, 184, 182,0.4),rgba(30,76,92,0.6));
+    height: 850px;
+}
+.major-body-section{
+    clear: both;
+}
+.main-content-wrap{
+    background-color: white;
+    border-radius: 50px 0 50px 50px; 
+    height: 700px;
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
+.work-display{
+    background-color:white;
+    height: 700px;
+    border-radius: 0 0 50px 0;
+    overflow-y:scroll;
+    padding-top: 40px;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.profile-display{
+    background-color: #f5f8f9;
+    height: 700px;
+    border-radius: 50px;
+    /* position: sticky; */
+    /* flex: 1 1 auto; */
+
+}
+.profile-pic img{
+    height:200px;
+    border-radius: 50px;
+    width:100%;
+    padding:20px;
+    margin-top: 30px;
+    
+}
+.profile-content{
+    height:200px;
+    /* border-radius: 50px; */
+    width:100%;
+    padding:20px;
+}
+/* .profile-content p{
+    line-height: 1;
+} */
+.btn{
+    background-color: mediumblue;
+    border-radius: 50px;
+    padding: 15px 30px;
+    color:#fff;
+    margin-top: 30px;
+}
+.btn:hover{
+    transition-delay: 0.5s;
+    background-color:rgba(0, 0, 205, 0.6);
+    transition-property: unset;
+    color: #fff;
+    margin-top: 30px;
+}
+.name {
+    font-size: 25px;
+    font-style: bold;
+}
+
+.my-work{
+    width: 90%;
+    height: auto;
+    margin: auto;
+    padding-top:30px;
+    text-align: justify;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.work-detail{
+    text-align: center;
+    border-radius: 50px;
+    border: 2px solid #f5f8f9;
+    margin: 10px 10px 10px 0;
+    height: auto;
+    
+}
+.work-detail h4{
+    margin: 0 0 2px 0 ;
+    font-weight: 600;
+}
+.work-detail p{
+ text-align: justify;    
+ padding: 20px;
+ font-weight: 400;
+}
+.fa-code{
+    font-size: 40px;
+    margin: 20px 0;
+}
+.age
+{
+    border-radius:20px ;
+    background-color:#E9EDF0;
+    padding: 10px 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.social-media i{
+    margin-right: 30px;
+    font-size: 25px;
+}
+.brief-profile{
+    margin-top: 25px;
+}
+.brief-profile i{
+    margin-top: 20px;
+    margin-right: 12px;
+}
+.profile-pic{
+    margin-top: 80px;
 }
