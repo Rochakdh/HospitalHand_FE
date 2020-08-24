@@ -1,11 +1,16 @@
 // import NewStudentModal from "./NewStudentModal";
 import 'semantic-ui-css/semantic.min.css'
-
+import {
+  Container,
+  Header
+} from 'semantic-ui-react'
+import Modal from 'react-awesome-modal';
+import React from 'react'
 import axios from "axios";
 
 import { API_URL2 } from "../constants";
 
-class Home extends Component {
+class Home extends React.Component {
   state = {
     notices: []
   };
@@ -43,7 +48,7 @@ render() {
       
     <section>
       <h1>Hospital Notice</h1>
-                <Modal visible={this.state.visible} style ={{paddingLeft: '50em'}}   onClickAway={() => this.closeModal()} >
+                <Modal visible={this.state.visible} style ={{paddingLeft: '50em'}} effect="fadeInUp"  onClickAway={() => this.closeModal()} >
                     <div>
                         <h1>Health is Wealth</h1>
                         <p>some tips to avoid this pandaemic</p>
@@ -55,7 +60,7 @@ render() {
                           </p>
                           
                         </Container>
-                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                        <button onClick={() => this.closeModal()}>Close</button>
                     </div>
                 </Modal>
     </section>

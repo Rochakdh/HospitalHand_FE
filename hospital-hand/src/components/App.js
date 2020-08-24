@@ -1,10 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router} from 'react-router-dom'
-import BaseRouter from '../Routes'
+import { BrowserRouter as Router,Route} from 'react-router-dom'
+// import BaseRouter from '../Routes'
 import 'semantic-ui-css/semantic.min.css'
 // import Modal from 'react-awesome-modal';
  
-import './css/style_popup.css'
+// import './css/style_popup.css'
 
 // import {
 //   Container,
@@ -12,6 +12,7 @@ import './css/style_popup.css'
 // } from 'semantic-ui-react'
 
 import Notice from '../Notice.jsx'
+import Home from './demo'
 
 
 
@@ -22,9 +23,9 @@ class App extends React.Component {
   render(){
     return(
       <Router>
-        <Notice>
-          <BaseRouter />
-        </Notice>
+        <Route exact path='/notice/' component={Notice}></Route>
+        <Route exact path='/demo/' component={Home}></Route>
+        
 
       </Router>
     );
