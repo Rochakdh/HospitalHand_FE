@@ -1,7 +1,7 @@
 import React from 'react'
 // import 'semantic-ui-css/semantic.min.css'
 
-class noticeform extends React.Component { 
+class Noticepopup extends React.Component { 
     state={
         credentials:{title:'',description:'',post_at:''}
     } 
@@ -41,4 +41,4 @@ class noticeform extends React.Component {
         );
     }
 } 
-export default noticeform;   
+export default Noticepopup;   

@@ -1,78 +1,67 @@
-import React from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+// import NewStudentModal from "./NewStudentModal";
+import 'semantic-ui-css/semantic.min.css'
 
 import axios from "axios";
 
-import { API_URL } from "../constants/index";
+import { API_URL2 } from "../constants";
 
+class Home extends Component {
+  state = {
+    notices: []
+  };
 
-class NewNoticeForm extends React.Component {
-    state = {
-      title: "",
-      description: "",
-      post_at: ""
-    };
-  
-    componentDidMount() {
-      if (this.props.notice) {
-        const { title, description, post_at } = this.props.notice;
-        this.setState({ title, description, post_at });
-      }
-    }
-  
-    onChange = e => {
-      this.setState({ [e.target.name]: e.target.value });
-    };
-  
-    createnotice = e => {
-      e.preventDefault();
-      axios.post(API_URL, this.state).then(() => {
-        this.props.resetState();
-        this.props.toggle();
-      });
-    };
-  
-    
-  
-    defaultIfEmpty = value => {
-      return value === "" ? "" : value;
-    };
-  
-    render() {
-      return (
-        <Form onSubmit={this.createnotice}>
-          <FormGroup>
-            <Label for="title">Title:</Label>
-            <Input
-              type="text"
-              name="title"
-              onChange={this.onChange}
-              value={this.defaultIfEmpty(this.state.name)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="description">Description:</Label>
-            <Input
-              type="text"
-              name="description"
-              onChange={this.onChange}
-              value={this.defaultIfEmpty(this.state.description)}
-            />
-          </FormGroup>
-          
-          <FormGroup>
-            <Label for="post_at">Phone:</Label>
-            <Input
-              type="text"
-              name="post_at"
-              onChange={this.onChange}
-              value={this.defaultIfEmpty(this.state.post_at)}
-            />
-          </FormGroup>
-          <Button>Send</Button>
-        </Form>
-      );
-    }
+  componentDidMount() {
+    this.resetState();
   }
-  
-export default NewNoticeForm;
+
+  getStudents = () => {
+    axios.get(API_URL2).then(res => this.setState({ notices: res.data }));
+  };
+
+  resetState = () => {
+    this.getStudents();
+  };
+
+ 
+  constructor(props){  
+    super(props);  
+    this.state = { visible:true };  
+  };   
+  closeModal(){
+  this.setState({
+      visible : false
+  });
+  }
+
+  togglePopup() {  
+this.setState({  
+     showPopup: !this.state.showPopup  
+  })}
+render() {
+  return (
+  <div> 
+      
+    <section>
+      <h1>Hospital Notice</h1>
+                <Modal visible={this.state.visible} style ={{paddingLeft: '50em'}}   onClickAway={() => this.closeModal()} >
+                    <div>
+                        <h1>Health is Wealth</h1>
+                        <p>some tips to avoid this pandaemic</p>
+                        <Container text style={{ marginTop: '7em' }}>
+                          <Header as='h1'>Semantic UI React Fixed Template</Header>
+                          <p>This is a basic fixed menu template using fixed size containers.</p>
+                          <p>
+                            A text container is used for the main container, which is useful for single column layouts.
+                          </p>
+                          
+                        </Container>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                    </div>
+                </Modal>
+    </section>
+  </div>  
+
+  );}}
+
+
+export default Home;  

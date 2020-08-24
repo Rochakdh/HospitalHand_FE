@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
 import axios from "axios";
 
-import { API_URL } from "./constants/index";
+import { API_URL1 } from "./constants/index";
 
 
 class NewNoticeForm extends React.Component {
@@ -26,7 +26,7 @@ class NewNoticeForm extends React.Component {
   
     createnotice = e => {
       e.preventDefault();
-      axios.post(API_URL, this.state).then(() => {
+      axios.post(API_URL1, this.state).then(() => {
         // this.props.resetState();
         
       });
