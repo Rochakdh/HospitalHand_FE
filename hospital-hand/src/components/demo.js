@@ -12,59 +12,57 @@ import { API_URL2 } from "../constants";
 
 class Home extends React.Component {
   state = {
-    notices: []
+    notice: []
   };
 
   componentDidMount() {
-    this.resetState();
+    axios.get(API_URL2)
+    .then(res => {
+      this.setState({ notice: res.data[0] })
+    console.log(res.data)
+    })
+    console.log(this.state.notice)
+    
   }
 
-  getStudents = () => {
-    axios.get(API_URL2).then(res => this.setState({ notices: res.data }));
-  };
-
-  resetState = () => {
-    this.getStudents();
-  };
-
+  
  
-  constructor(props){  
-    super(props);  
-    this.state = { visible:true };  
-  };   
-  closeModal(){
-  this.setState({
-      visible : false
-  });
-  }
+//   constructor(props){  
+//     super(props);  
+//     this.state = { visible:true };  
+//   };   
+//   closeModal(){
+//   this.setState({
+//       visible : false
+//   });
+//   }
 
-  togglePopup() {  
-this.setState({  
-     showPopup: !this.state.showPopup  
-  })}
+//   togglePopup() {  
+// this.setState({  
+//      showPopup: !this.state.showPopup  
+//   })}
 render() {
   return (
   <div> 
       
-    <section>
+     <section>
       <h1>Hospital Notice</h1>
+       <h2>{this.state.notice.title}</h2>
+      <p>{this.state.notice.description}</p> 
                 <Modal visible={this.state.visible} style ={{paddingLeft: '50em'}} effect="fadeInUp"  onClickAway={() => this.closeModal()} >
                     <div>
                         <h1>Health is Wealth</h1>
-                        <p>some tips to avoid this pandaemic</p>
+                        
                         <Container text style={{ marginTop: '7em' }}>
                           <Header as='h1'>Semantic UI React Fixed Template</Header>
-                          <p>This is a basic fixed menu template using fixed size containers.</p>
-                          <p>
-                            A text container is used for the main container, which is useful for single column layouts.
-                          </p>
+                          
                           
                         </Container>
                         <button onClick={() => this.closeModal()}>Close</button>
                     </div>
                 </Modal>
     </section>
-  </div>  
+  </div>   
 
   );}}
 
