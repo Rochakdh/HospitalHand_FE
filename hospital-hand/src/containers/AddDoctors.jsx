@@ -76,8 +76,8 @@ export default class AddDoctors extends Component {
         e.preventDefault();
         Axios.post(`http://127.0.0.1:8000/categories/create/`, this.state)
             .then(() => {
-                this.props.resetState();
-                this.props.toggle();
+                this.resetState();
+                this.toggle();
             });
         console.log(this.state)
     };
@@ -106,7 +106,10 @@ export default class AddDoctors extends Component {
 
 
 
-            <Form onSubmit={this.props.doctor ? this.editDoctor : this.createDoctor} action='/categories' style={{ paddingLeft: 40 + "em" }} >
+            <Form onSubmit={this.props.doctor ? this.editDoctor : this.createDoctor} style={{ paddingLeft: 40 + "em" }} >
+
+
+
                 <Form.Group style={{ paddingTop: 10 + "em" }}>
                     <Input
                         type="text"
@@ -122,6 +125,7 @@ export default class AddDoctors extends Component {
                         type="text"
                         placeholder="Experience"
                         name="experience"
+
                         onChange={this.onChange}
                         value={this.defaultIfEmpty(this.state.experience)}
                     />
@@ -131,7 +135,7 @@ export default class AddDoctors extends Component {
 
                     <select onChange={this.onChange} name="department" value={this.defaultIfEmpty(this.state.department)} placeholder='Department' style={{ width: 15 + "em" }}>
 
-                        <option selected disabled>Department Name</option>
+                        <option disabled>Department Name</option>
                         {
                             this.state.allDepartment.map(
                                 deps =>
@@ -167,7 +171,9 @@ export default class AddDoctors extends Component {
                     control={Button}
                     content='Add Doctor'
 
+
                 />
+                <a href='/categories/'> Go to Department Page</a>
 
             </Form >
         )
