@@ -46,7 +46,7 @@ export default class Profile extends Component {
                     "middle_name": response.data[0].middle_name,
                     "last_name": response.data[0].last_name,
                     "date_of_birth": response.data[0].date_of_birth,
-                    // "profile_pictures":response.data[0].profile_pictures,
+                    "profile_pictures":response.data[0].profile_pictures,
                     "contact_address":response.data[0].contact_address,
                 })                
             }
@@ -71,7 +71,7 @@ export default class Profile extends Component {
             "middle_name": updatedUserData.middle_name,
             "last_name": updatedUserData.last_name,
             "date_of_birth":updatedUserData.date_of_birth,
-            // "profile_pictures":response.data[0].profile_pictures,
+            "profile_pictures":updatedUserData.profile_pictures,
             "contact_address":updatedUserData.contact_address,
 
         })
@@ -89,7 +89,7 @@ export default class Profile extends Component {
                         <div className="row">
                             <div className="col-md-3 profile-display">
                                 <div className="profile-pic">
-                                    <img src={this.state.profile_pictures} />
+                                    <img src={this.state.profile_pictures} alt='Profile Pic'/>
                                 </div>
                                 <div className="profile-content">
                                     <p className="name"><b> {this.state.first_name} {this.state.middle_name} {this.state.last_name}</b></p>
@@ -97,7 +97,6 @@ export default class Profile extends Component {
                                     <br/>
                                     <p>DOB: +{this.state.date_of_birth}</p>
                                     <br/>
-                                    <p>Koteshwor,Kathmandu,Nepal</p>
                                     <div className="brief-profile">
                                         <i className="fas fa-map-marker-alt"></i> {this.state.contact_address}<br/>
                                         <i className="far fa-envelope"></i>{this.state.email}<br/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Form} from 'semantic-ui-react'
-import validation from '../api/Authenticated'
+import form from '../api/FormData'
 
 
 export default class UpdateProfile extends Component {
@@ -15,7 +15,7 @@ export default class UpdateProfile extends Component {
             "middle_name": this.props.sendUserData.middle_name,
             "last_name": this.props.sendUserData.last_name,
             "date_of_birth": this.props.sendUserData.date_of_birth,
-            "profile_pictures":'',
+            "profile_pictures":this.props.sendUserData.profile_pictures,
             "contact_address":this.props.sendUserData.contact_address,
         }
         this.onChange = this.onChange.bind(this)
@@ -23,20 +23,20 @@ export default class UpdateProfile extends Component {
         // this.updatedUserProfile = this.props.updatedUserProfile.bind(this)
     };
     submitUpdatedForm = (e)=>{
-        const {id,email,username,contact_number,first_name,middle_name,last_name,date_of_birth,contact_address} = this.state
-        validation.put(`/user/${this.state.id}/`,
-            {
-                email:email,
-                username:username,
-                contact_number:contact_number,
-                first_name:first_name,
-                middle_name: middle_name,
-                last_name:last_name,
-                date_of_birth:date_of_birth,
-                // "profile_pictures":profile_pictures,
-                contact_address:contact_address,
-            }
-        ).then((response)=>{
+        const {id,email,username,contact_number,first_name,middle_name,last_name,
+            date_of_birth,contact_address} = this.state
+            let formData = new FormData()
+            var imagedata = document.querySelector('input[type="file"]').files[0];
+            formData.append("email",email)
+            formData.append("username",username)
+            formData.append("contact_number",contact_number)
+            formData.append("first_name",first_name)
+            formData.append("middle_name", middle_name)
+            formData.append("last_name",last_name)
+            formData.append("date_of_birth",date_of_birth)
+            formData.append("profile_pictures",imagedata)
+            formData.append("contact_address",contact_address)
+        form.put(`/user/${id}/`,formData).then((response)=>{
                 console.log(response.data);
                 if (response.status === 200){
                     alert('update successful')
@@ -44,10 +44,10 @@ export default class UpdateProfile extends Component {
                 this.props.getUpdatedUser(response.data)
             }
         ).catch((error)=>{
-            let errorData = error.response.data
+            let errorData = error.response
             for(var errorMsg in errorData) {
                 if(errorData.hasOwnProperty(errorMsg)) {
-                    alert(errorData[errorMsg])
+                    console.log(errorData[errorMsg])
                 }
             } 
             // console.log(error.response.data)
@@ -59,7 +59,8 @@ export default class UpdateProfile extends Component {
         });
     };
     render() {
-        const {email,username,contact_number,first_name,middle_name,last_name,date_of_birth,contact_address} = this.state
+        const {email,username,contact_number,first_name,
+            middle_name,last_name,date_of_birth,profile_pictures,contact_address} = this.state
         return (
             <div className='update-form'>
                 <Form onSubmit={this.submitUpdatedForm}>
@@ -79,6 +80,7 @@ export default class UpdateProfile extends Component {
                     <Form.Group widths={2}>
                     <Form.Input label='Address' placeholder='Address' name='contact_address' value={contact_address}  onChange={this.onChange}  />
                     <Form.Input label='Phone' type='number' name='contact_number' placeholder='Phone'  value={contact_number}  onChange={this.onChange} name='contact_number' required/>
+                    <Form.Input label='Image' type='File'  placeholder='Image'  value={profile_pictures}  onChange={this.onChange}/>
                     </Form.Group>
                     <Button type='submit' color='teal' className="update-submit-btn">Submit</Button>
                 </Form>
