@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
 
-const color = ['teal']
+const color = "teal"
 
 export default class ProfileTable extends Component {
     render() {

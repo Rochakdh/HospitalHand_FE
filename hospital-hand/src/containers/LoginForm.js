@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import {Redirect} from 'react-router-dom'
 import validation from '../api/setup';
+import Profile from './Profile';
 
 export default class LoginForm extends Component {
     constructor(props){
@@ -19,6 +20,7 @@ export default class LoginForm extends Component {
         }
         this.onChange = this.onChange.bind(this)
         this.loginFormSubmit = this.loginFormSubmit.bind(this)
+        // this.userProfile = this.props.userProfile.bind(this)
     };
     onChange = (e)=>{
         this.setState({
@@ -36,13 +38,17 @@ export default class LoginForm extends Component {
             password: password,
           })
           .then( (response) => {
-            console.log(response)
+            const userid = response.data.id
+            console.log(userid);
             const token = response.data.token
             if (token){
                 localStorage.setItem("token",token)
                 this.setState({
                     loggedIn : true,
+                    username: userid,
                 });
+                console.log(userid)
+                this.props.userProfile(userid)
             }
           })
           .catch( (error) => {
@@ -53,10 +59,9 @@ export default class LoginForm extends Component {
         });
         
     };
-
     render() {
         if(this.state.loggedIn === true ){
-            return <Redirect to="/profile"></Redirect>
+            return <Redirect to='/'></Redirect>
         }
         return (
             <div>

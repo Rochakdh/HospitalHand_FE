@@ -181,6 +181,8 @@ nav{
     border-radius: 10px;
     border: 1px solid black;
     margin: auto;
+    margin-top: 80px;
+    margin-bottom: 30px;
 }
 .pending-appointment,.fixed-appointment{
     padding: 10px 10px;
@@ -226,11 +228,9 @@ nav{
 
 }
 .profile-pic img{
-    height:200px;
-    border-radius: 50px;
+    height:100%;
+    border-radius: 10px;
     width:100%;
-    padding:20px;
-    margin-top: 30px;
     
 }
 .profile-content{
@@ -257,7 +257,7 @@ nav{
     margin-top: 30px;
 }
 .name {
-    font-size: 25px;
+    font-size: 18px;
     font-style: bold;
 }
 
@@ -292,7 +292,7 @@ nav{
     font-size: 40px;
     margin: 20px 0;
 }
-.age
+.username
 {
     border-radius:20px ;
     background-color:#E9EDF0;
@@ -311,6 +311,10 @@ nav{
     margin-top: 20px;
     margin-right: 12px;
 }
-.profile-pic{
-    margin-top: 80px;
+.update-form{
+    margin:70px 50px;
+}
+.update-submit-btn{
+    margin-top: 40px !important;
+    width: 100% !important;
 }
