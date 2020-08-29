@@ -47,7 +47,7 @@ export default class View extends Component {
     onClose = () => {
         this.setState({
             isOpen: false,
-            doctorOpen: false
+            doctorOpen: false,
         })
     }
 

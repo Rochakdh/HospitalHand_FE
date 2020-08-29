@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import { Modal, List, Button, Image } from 'semantic-ui-react';
+import Appointment from './Appointment'
 
 
 
 export default class AllDoctors extends Component {
+
+    state = {
+        appointOpen: false,
+        id: "",
+        name: "",
+    }
 
 
     onCloseClick = () => {
@@ -23,7 +30,15 @@ export default class AllDoctors extends Component {
 
     fixAppointment = (name, id) => {
         console.log("Appointment Fixed", name, id, this.selectedHospital)
+        this.setState({ appointOpen: true, id: id, name: name });
 
+
+    }
+
+    onCloseAppointment = () => {
+        this.setState({
+            appointOpen: false,
+        })
     }
 
 
@@ -35,10 +50,16 @@ export default class AllDoctors extends Component {
 
         const { doctorOpen } = this.props
         const { data } = this.props
+        const { id, name, appointOpen } = this.state
+
 
 
         return (
+
+
             <Modal open={doctorOpen} onClose={this.onCloseClick} >
+                <Appointment  data={data} appointOpen={appointOpen} onClose={this.onCloseAppointment} id={id} name={name}></Appointment>
+
                 <Modal.Header><h5>{this.props.Category}</h5> Doctors</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
@@ -50,7 +71,7 @@ export default class AllDoctors extends Component {
 
 
                                         <List.Content floated='right'>
-                                            <Button onClick={this.fixAppointment.bind(this, doctors.name, doctors.id)} primary>Fix Appointment</Button>
+                                            <Button content="Appoint" onClick={this.fixAppointment.bind(this, doctors.name, doctors.id)} primary></Button>
                                         </List.Content>
 
                                         <List.Content floated='right'>
