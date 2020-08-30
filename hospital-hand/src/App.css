@@ -311,10 +311,43 @@ nav{
     margin-top: 20px;
     margin-right: 12px;
 }
-.update-form{
-    margin:70px 50px;
+.update-form {
+    margin: 50px 50px 25px 50px;
+    border: 1px solid teal;
+    border-radius: 10px;
+    padding: 30px;
 }
 .update-submit-btn{
     margin-top: 40px !important;
     width: 100% !important;
+}
+.profile-changer{
+    margin :10px auto ;
+    border: 1px solid teal;
+    border-radius: 10px;
+    padding: 20px !important;
+    height: 260px;
+    width: 60%;
+    text-align: center;
+}
+.profile-adjust{
+    width: 60%;
+    /* height: 180px; */
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: auto;
+}
+.profile-adjust img{
+    height:120px;
+    border-radius: 10px;
+    width:100%;
+}
+.update-profile-btn{
+    margin: 10px 5px !important;
+    padding: 10px !important;
+    background-color: #00b5ad;
+    border: solid #00b5ad;
+    border-radius: 5px;
+    color: white;
+
 }

@@ -9,6 +9,7 @@ import ProfileHomeContent from './ProfileHomeContent'
 import ProfileButtons from './ProfileButtons'
 import UpdateProfile from './UpdateProfile'
 
+
 export default class Profile extends Component {
     constructor(props){
         super(props)
@@ -24,13 +25,15 @@ export default class Profile extends Component {
             "username": "",
             "contact_number": "",
             "first_name": "",
-            "middle_name": '',
+            "middle_name": "",
             "last_name": "",
             "date_of_birth": '',
             "profile_pictures":'',
             "contact_address":"",
+            // "password":'',
             loggedIn,
-            isUpdate:false
+            isUpdate:false,
+            isOpen:false,
         }
         console.log(props.userData);
         // this.setState({username:props.username})
@@ -48,6 +51,7 @@ export default class Profile extends Component {
                     "date_of_birth": response.data[0].date_of_birth,
                     "profile_pictures":response.data[0].profile_pictures,
                     "contact_address":response.data[0].contact_address,
+                    // "password":response.data[0].password
                 })                
             }
         ).catch((error)=>{
@@ -96,7 +100,6 @@ export default class Profile extends Component {
                                     <div className="username"><p>Username : <b>{this.state.username}</b></p></div>
                                     <br/>
                                     <p>DOB: +{this.state.date_of_birth}</p>
-                                    <br/>
                                     <div className="brief-profile">
                                         <i className="fas fa-map-marker-alt"></i> {this.state.contact_address}<br/>
                                         <i className="far fa-envelope"></i>{this.state.email}<br/>
@@ -108,7 +111,6 @@ export default class Profile extends Component {
                                 <ProfileButtons getUpdateStatus = {this.updatedStatus} />
                                 {(!this.state.isUpdate) ? <ProfileHomeContent />:<UpdateProfile sendUserData={this.state}  getUpdatedUser={this.updatedUserProfile}/> }
                             </div>
-                             
                         </div>
                     </div>
                 </div>

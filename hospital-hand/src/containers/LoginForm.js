@@ -33,6 +33,7 @@ export default class LoginForm extends Component {
         console.log(this.state)
         e.preventDefault();
         const {username,password} = this.state
+        console.log(this.state)
         validation.post('user/login/', {
             username: username,
             password: password,
