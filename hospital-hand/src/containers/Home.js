@@ -22,7 +22,7 @@ export default class Home extends Component {
                             <p>
                                 Book appointment to available doctor by Signing Up.
                             </p>
-                            <Link to="/categories/" ><button type="submit" className="homme-btn">Make Appointment</button></Link>
+                            <Link to="/categories" ><button type="submit" className="homme-btn">Make Appointment</button></Link>
                         </div>
                     </div>
                 </div>
