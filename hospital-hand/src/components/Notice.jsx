@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
+import {DatePicker,useState}  from "react-datepicker";
+
 import axios from "axios";
 
-import { API_URL1 } from "./constants/index";
+import { API_URL1 } from "../constants/index";
 
 
 class NewNoticeForm extends React.Component {
@@ -33,7 +35,6 @@ class NewNoticeForm extends React.Component {
     };
   
     
-  
     defaultIfEmpty = value => {
       return value === "" ? "" : value;
     };
@@ -63,7 +64,7 @@ class NewNoticeForm extends React.Component {
           <FormGroup>
             <Label for="post_at">Post at:</Label>
             <Input
-              type="text"
+              type="date"
               name="post_at"
               onChange={this.onChange}
               value={this.defaultIfEmpty(this.state.post_at)}

@@ -9,6 +9,7 @@ import React from 'react'
 import axios from "axios";
 
 import { API_URL2 } from "../constants";
+import {Link, RichText, Date} from 'prismic-reactjs';
 
 class Home extends React.Component {
   state = {
@@ -20,41 +21,63 @@ class Home extends React.Component {
     .then(res => {
       this.setState({ notice: res.data[0] })
     console.log(res.data)
-    })
     console.log(this.state.notice)
+    })
+    
     
   }
 
   
  
-//   constructor(props){  
-//     super(props);  
-//     this.state = { visible:true };  
-//   };   
-//   closeModal(){
-//   this.setState({
-//       visible : false
-//   });
-//   }
+  constructor(props){  
+    var today = new Date(),
 
-//   togglePopup() {  
-// this.setState({  
-//      showPopup: !this.state.showPopup  
-//   })}
+    date =   (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear() ;
+
+   
+
+    this.pos2 = {
+
+      currentDate: date
+
+    }
+    super(props);  
+    if (this.state.notice.post_at=this.date)
+    {
+      this.pos1 = { visible:true };  
+
+    }
+    else
+    {
+      this.pos1= {visible:false};
+    }
+    
+  };   
+  closeModal(){
+  this.setPos({
+      visible : false
+  });
+  }
+
+  togglePopup() {  
+this.setPos({  
+     showPopup: !this.state.showPopup  
+  })}
 render() {
   return (
   <div> 
       
      <section>
-      <h1>Hospital Notice</h1>
-       <h2>{this.state.notice.title}</h2>
-      <p>{this.state.notice.description}</p> 
-                <Modal visible={this.state.visible} style ={{paddingLeft: '50em'}} effect="fadeInUp"  onClickAway={() => this.closeModal()} >
+      
+                <Modal visible={this.pos1.visible} style ={{paddingLeft: '50em'}} effect="fadeInUp"  onClickAway={() => this.closeModal()} >
                     <div>
-                        <h1>Health is Wealth</h1>
+                        
+                        <h1>Hospital Notice</h1>
+                          <h2>{this.state.notice.title}</h2>
+                            
                         
                         <Container text style={{ marginTop: '7em' }}>
-                          <Header as='h1'>Semantic UI React Fixed Template</Header>
+                          <Header as='h1'>{this.state.notice.description}</Header>
                           
                           
                         </Container>

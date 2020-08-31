@@ -11,9 +11,9 @@ import 'semantic-ui-css/semantic.min.css'
 //   Header
 // } from 'semantic-ui-react'
 
-import Notice from '../Notice.jsx'
-import Home from './demo'
-
+import Notice from './Notice.jsx'
+import Home from './Noticepopup'
+import List from './Noticelist'
 
 
 
@@ -25,7 +25,7 @@ class App extends React.Component {
       <Router>
         <Route exact path='/notice/' component={Notice}></Route>
         <Route exact path='/demo/' component={Home}></Route>
-        
+        <Route exact path='/noticelist/' component={List}></Route>
 
       </Router>
     );
