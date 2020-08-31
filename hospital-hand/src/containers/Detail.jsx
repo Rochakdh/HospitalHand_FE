@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Modal } from 'semantic-ui-react';
 
+
 export default class Detail extends Component {
 
     onCloseClick = () => {
@@ -9,14 +10,24 @@ export default class Detail extends Component {
 
     }
     render() {
+        const modalStyle = {
+            marginLeft: 16 + "em",
+            marginTop: 10 + "em",
+            height: 'auto'
+
+
+        };
 
         const { isOpen } = this.props
         return (
-            <Modal open={isOpen} onClose={this.onCloseClick} >
+            <Modal style={modalStyle} open={isOpen} onClose={this.onCloseClick} >
                 <Modal.Header>{this.props.Category}</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
-                        {this.props.More}
+                        <strong style={{ color: "black" }}>
+                            {this.props.More}
+                        </strong>
+
                     </Modal.Description>
                 </Modal.Content>
 

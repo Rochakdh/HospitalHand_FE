@@ -12,11 +12,11 @@ export default class Home extends Component {
             <>
                 <div className="backgroundImage">
                     <div className="bgColor">
-                        < Nav/>
+                        < Nav />
                         <div className='homeContent'>
                             <h1>Hospital Hand</h1>
                             <p>
-                                We aspire to be best online platform to assist you to get 
+                                We aspire to be best online platform to assist you to get
                                 hospital service easily and quickly.
                             </p>
                             <p>
@@ -26,7 +26,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </div>
-                
+
             </>
         )
     }

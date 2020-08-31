@@ -10,6 +10,15 @@ export default class Appointment extends Component {
 
     render() {
 
+        const modalStyle = {
+
+            marginLeft: 22 + "em",
+            marginTop: 10 + "em",
+            height: 'auto'
+
+        };
+
+
 
         const { appointOpen } = this.props
 
@@ -18,6 +27,7 @@ export default class Appointment extends Component {
 
             <Modal
 
+                style={modalStyle}
                 basic
                 open={appointOpen}
                 size='small'
