@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css'
 import LoginForm from './containers/LoginForm';
 import Profile from './containers/Profile';
+import UpdateAppointment from './containers/UpdateAppointment';
 import SignUp from './containers/SignUp';
 import Notice from './containers/Notice';
 import AuthenticatedUser from './api/Authenticated'
@@ -49,6 +50,9 @@ export default class App extends Component {
         </Route>
         <Route path='/profile' exact component={Profile}>
           <Profile />
+        </Route>
+        <Route path="/profile/updateappointment" exact component={UpdateAppointment}>
+          <UpdateAppointment />
         </Route>
         <Route path='/signup' exact component={SignUp}>
           <SignUp />
