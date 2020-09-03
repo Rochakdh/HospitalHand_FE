@@ -82,11 +82,11 @@ class List extends React.Component {
         <tr selectable textAlign="center" key={notice.id}>
              <td data-label="Title" >{notice.title}</td> 
              <td data-label="Action">
-               <a href='/notice/'>
-               <button type="submit" > Detail</button>
-               </a>
+               
+              <button type="submit" onClick={this.detail_data.bind(this)} > Detail</button>
+              
               <button type="submit" onClick={this.update_data}>Update</button>
-              < button type="submit" onClick={this.del_data.bind(this,notice.id)}>Delete</button></td>
+              <button type="submit" onClick={this.del_data.bind(this,notice.id)}>Delete</button></td>
         </tr>
             ))}
       </tbody>

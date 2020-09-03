@@ -11,7 +11,8 @@ import axios from "axios";
 
 export default class DetailNotice extends React.Component {
   state = {
-    notice: []
+    notice: [],
+    visible:true
   };
 
   componentDidMount() {
@@ -24,22 +25,27 @@ export default class DetailNotice extends React.Component {
     
     
   }
-
   
+closeModal() {
+    this.setState({
+        visible : false
+    });
+}
+
+ 
  
 render() {
-
+    const {isDetailOpen}=this.props
   return (
   <div> 
       
      <section>
       
-                <Modal  style ={{paddingLeft: '50em'}} effect="fadeInUp"  >
-                  <Modal.Header>Update Notice</Modal.Header>
+                <Modal  style ={{paddingLeft: '50em'}} width="400" height="300"  effect="fadeInUp"  visible={isDetailOpen}>
+                  <h2>Hospital Notice</h2>
                     <div>
                         
-                        <h1>Hospital Notice</h1>
-                          <h2>{this.state.notice.title}</h2>
+                        <h2>{this.state.notice.title}</h2>
                             
                         
                         <Container text style={{ marginTop: '7em' }}>
@@ -47,10 +53,12 @@ render() {
                           
                           
                         </Container>
-                        <button type="submit" content="Submit" >Close</button>
+                        
                     </div>
+                    <button type="submit" content="Submit" onClick={this.state.closeModal}>Close</button>
                 </Modal>
     </section>
+
   </div>   
 
   )
