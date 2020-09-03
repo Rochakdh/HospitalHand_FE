@@ -12,8 +12,9 @@ import 'semantic-ui-css/semantic.min.css'
 // } from 'semantic-ui-react'
 
 import Notice from './Notice.jsx'
-import Home from './Noticepopup'
+import DetailNotice from './DetailNotice'
 import List from './Noticelist'
+import UpdateNoticeForm from './UpdateNoticeForm.jsx'
 
 
 
@@ -23,9 +24,10 @@ class App extends React.Component {
   render(){
     return(
       <Router>
-        <Route exact path='/notice/' component={Notice}></Route>
-        <Route exact path='/demo/' component={Home}></Route>
+        <Route exact path='/createnotice/' component={Notice}></Route>
+        <Route exact path='/detailnotice/' component={DetailNotice}></Route>
         <Route exact path='/noticelist/' component={List}></Route>
+        <Route exact path='/updatenotice/' component={UpdateNoticeForm}></Route>
 
       </Router>
     );
@@ -33,8 +35,4 @@ class App extends React.Component {
 
 
 }
-
-
-
-
 export default App
