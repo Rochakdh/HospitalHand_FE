@@ -6,95 +6,115 @@ import {
   able,
   Button
 } from 'semantic-ui-react'
-import Modal from 'react-awesome-modal';
+// import Modal from 'react-awesome-modal';
 import React from 'react'
 import axios from "axios";
 import { Redirect } from 'react-router-dom';
 
 import Noticepopup from './DetailNotice'
-import {UpdateNoticeForm} from './UpdateNoticeForm'
+import { UpdateNoticeForm } from './UpdateNoticeForm'
 import { API_URL2, API_URL3 } from "../constants";
-import {Link, RichText, Date} from 'prismic-reactjs';
+import DetailNotice from './DetailNotice';
+// import {Link, RichText, Date} from 'prismic-reactjs';
 
 class List extends React.Component {
   state = {
+    id: "",
+    title: "",
+    description: "",
+
+
     notice: [],
     isDetailOpen: false,
-    isUpdateOpen:false
+    isUpdateOpen: false
   };
 
   componentDidMount() {
     axios.get(API_URL2)
-    .then(res => {
-      this.setState({ notice: res.data })
-    
-    console.log(this.state.notice)
+      .then(res => {
+        this.setState({ notice: res.data })
+
+
+      })
+
+  }
+  detail_data(id, title, description) {
+    this.setState({
+      isDetailOpen: true,
+      id: id,
+      title: title,
+      description: description
+
     })
-    
+
+
+
   }
-  detail_data(){
-    this.setState({isDetailOpen:true})
+  update_data() {
+    this.setState({ isUpdateOpen: true })
   }
-  update_data(){
-    this.setState({isUpdateOpen:true})
-  }
-  
+
   del_data(id) {
     console.log(id);
-    axios.delete(`http://localhost:8000/notice/update_delete/${id}/`,this.state).then(window.location.reload())
-    
+    axios.delete(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then(window.location.reload())
+
   };
-  onDetailClose(){
+  onDetailClose = () => {
     this.setState({
-      isDetailOpen:false
+      isDetailOpen: false,
+
     })
   }
-  onUpdateClose(){
-    this.setState({
-      isUpdateOpen:false
-    })
-  }
-    
+  // onUpdateClose = () => {
+  //   this.setState({
+  //     isUpdateOpen: false
+  //   })
+  // }
 
-    render(){
-      const {notice}=this.props
-      const {data}=this.props
-      const {isDetailOpen}=this.state
-      const {isUpdateOpen}=this.state
-     
 
-      
-        return(
-          <div>
+  render() {
+    const { notice } = this.props
+    const { data } = this.props
+    const { isDetailOpen } = this.state
+    const { isUpdateOpen } = this.state
+    const { id, title, description } = this.state
 
-            {/* <Noticepopup isDetailOpen={isDetailOpen} onDetailClose={this.onDetailClose}> </Noticepopup> */}
-            {/* <UpdateNoticeForm isUpdateOpen={isUpdateOpen} onUpdateClose={onUpdateClose}></UpdateNoticeForm> */}
-          <table className="ui celled table">
-        <thead>
-    <tr>
-      <th>Title</th>
-      <th>Action</th>
-    </tr>
-        </thead>
-  <tbody>
-    {this.state.notice.map(notice => (
-            
-        <tr selectable textAlign="center" key={notice.id}>
-             <td data-label="Title" >{notice.title}</td> 
-             <td data-label="Action">
-               
-              <button type="submit" onClick={this.detail_data.bind(this)} > Detail</button>
-              
-              <button type="submit" onClick={this.update_data}>Update</button>
-              <button type="submit" onClick={this.del_data.bind(this,notice.id)}>Delete</button></td>
-        </tr>
+
+
+    return (
+      <div>
+
+
+        {/* <Noticepopup isDetailOpen={isDetailOpen} onDetailClose={this.onDetailClose}> </Noticepopup> */}
+        {/* <UpdateNoticeForm isUpdateOpen={isUpdateOpen} onUpdateClose={onUpdateClose}></UpdateNoticeForm> */}
+
+        <DetailNotice id={id} title={title} description={description} isDetailOpen={isDetailOpen} onDetailClose={this.onDetailClose} ></DetailNotice>
+        <table className="ui celled table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.notice.map(notice => (
+
+              <tr selectable textAlign="center" key={notice.id}>
+                <td data-label="Title" >{notice.title}</td>
+                <td data-label="Action">
+
+                  <button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description)} > Detail</button>
+
+                  <button type="submit" onClick={this.update_data}>Update</button>
+                  <button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</button></td>
+              </tr>
             ))}
-      </tbody>
-      </table>
+          </tbody>
+        </table>
       </div>
-        )
-    };
-  }
+    )
+  };
+}
 
 
 export default List;
