@@ -159,20 +159,19 @@ export default class App extends Component {
     render() {
         const { categories, results, query } = this.state
         const data = results.length === 0 && !query ? categories : results;
+
+
+
         return (
             <Router>
 
                 <div >
+
                     <Route path='/categories' exact component={View}>
                         <Container >
                             <div style={{ paddingTop: 2 + "em" }}>
-                                <h1 style={{ paddingLeft: 15 + "em" }}> Select The Category</h1>
-                                <Input
-                                    icon="search"
-                                    placeholder="Search Department"
-                                    onChange={this.onSearchChange}
-                                ></Input>
-                                <View data={data}></View>
+
+                                <View onSearchChange={this.onSearchChange} data={data}></View>
 
                             </div>
 

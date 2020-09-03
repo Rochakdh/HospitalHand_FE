@@ -4,6 +4,7 @@ import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import UpdateProfile from './UpdateProfile'
 import UpdateAppointment from './UpdateAppointment'
+import DeleteAppointment from './DeleteAppointment'
 
 const color = "teal"
 
@@ -13,6 +14,14 @@ export default class ProfileTable extends Component {
         appointment_info: [],
 
         id: "",
+        appointment_date: "",
+        patient_name: "",
+        appointment_time: "",
+        select_hospital: "",
+        doctor_requested: "",
+
+        updateappointOpen: false,
+        deleteappointOpen: false
 
 
 
@@ -34,17 +43,58 @@ export default class ProfileTable extends Component {
 
     }
 
-    updateAppointment = (id) => {
+    updateAppointment = (id, patient_name, doctor_requested, select_hospital, appointment_time, appointment_date) => {
 
-        Axios.get(`http://127.0.0.1:8000/appointment/profile/update/${id}`, this.state)
+        this.setState({
+            id: id,
+            updateappointOpen: true,
+
+            appointment_date: appointment_date,
+            appointment_time: appointment_time,
+            doctor_requested: doctor_requested,
+            select_hospital: select_hospital,
+            patient_name: patient_name
+        })
     }
+
+    deleteAppoint = (id) => {
+
+        this.setState({
+            id: id,
+            deleteappointOpen: true,
+
+        })
+    }
+
+
+
+
+
+
+    onCloseUpdateAppointment = () => {
+        this.setState({
+            updateappointOpen: false
+        })
+    }
+
+
+    onCloseDeleteAppointment = () => {
+        this.setState({
+            deleteappointOpen: false
+        })
+    }
+
+
 
 
     render() {
 
+        const { updateappointOpen, deleteappointOpen, id, patient_name, doctor_requested, select_hospital, appointment_time, appointment_date } = this.state
+
         return (
             <div>
-                <UpdateAppointment updateappointOpen={updateappointOpen} onClose={this.onCloseUpdateAppointment} id={id} ></UpdateAppointment>
+                <UpdateAppointment updateappointOpen={updateappointOpen} onClose={this.onCloseUpdateAppointment} id={id} patient_name={patient_name} doctor_requested={doctor_requested} select_hospital={select_hospital} appointment_time={appointment_time} appointment_date={appointment_date}></UpdateAppointment>
+                <DeleteAppointment deleteappointOpen={deleteappointOpen} onClose={this.onCloseDeleteAppointment} id={id} ></DeleteAppointment>
 
 
                 <Table color={color} key={color} inverted>
@@ -73,13 +123,13 @@ export default class ProfileTable extends Component {
                                     <Table.Cell>{app.appointment_time}</Table.Cell>
                                     <Table.Cell>No</Table.Cell>
                                     <Table.Cell>
-                                        <Link to='profile/updateAppointment' >
-                                            <Button onClick={this.updateAppointment.bind(this, app.id)}>
-                                                Update
+
+                                        <Button onClick={this.updateAppointment.bind(this, app.id, app.patient_name, app.doctor_requested, app.select_hospital, app.appointment_time, app.appointment_date)}>
+                                            Update
                                             </Button>
-                                        </Link>
+
                                     </Table.Cell>
-                                    <Table.Cell><Button>Delete</Button></Table.Cell>
+                                    <Table.Cell><Button onClick={this.deleteAppoint.bind(this, app.id)}>Delete</Button></Table.Cell>
 
                                 </Table.Row>
 
@@ -91,8 +141,6 @@ export default class ProfileTable extends Component {
                 </Table>
             </div >
         )
-
-
 
     }
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Table, Button, Form } from 'semantic-ui-react';
+import { Table, Button, Form, Input } from 'semantic-ui-react';
 
 import Detail from './Detail.jsx'
 import AllDoctors from './AllDoctors'
 import Axios from 'axios';
+import Nav from './Nav'
 
 
 
@@ -53,20 +54,28 @@ export default class View extends Component {
 
 
     render() {
-        const { data } = this.props
+        const { data, onSearchChange } = this.props
         const { isOpen, doctors, doctorOpen, id, Category, More } = this.state
 
         return (
 
-            <div>
+            <div >
+                <Nav />
+
+                <Input
+                    icon="search"
+                    placeholder="Search Department"
+                    onChange={this.props.onSearchChange}
+                ></Input>
 
                 <Detail data={data} isOpen={isOpen} onClose={this.onClose} id={id} Category={Category} More={More}></Detail>
                 <AllDoctors data={this.state.doctors} doctorOpen={doctorOpen} onClose={this.onClose} id={id} Category={Category} doctors={doctors} ></AllDoctors>
-                <Form action="/doctors/add/" style={{ paddingLeft: 70 + "em" }}>
+                {/* <Form action="/doctors/add/" style={{ paddingLeft: 70 + "em" }}>
 
                     <Button color="facebook">Add Doctor</Button>
 
-                </Form>
+                </Form> */}
+                <br></br>
                 <Table sortable celled fixed>
                     <Table.Header>
                         <Table.Row>
