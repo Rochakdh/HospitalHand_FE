@@ -5,6 +5,8 @@ import DashboardHome from './DashboardHome'
 import DashboardDoctor from './DashboardDoctor'
 import DashboardPatient from './DashboardPatient'
 
+
+
 export default class Dashboard extends Component {
     constructor(props)
     {
@@ -19,10 +21,9 @@ export default class Dashboard extends Component {
             isDoctor:false,
             isAppointment:false,
             isnotice:false,
-            loggedIn
-            
+            loggedIn,
+            // departments:''
         }
-        
     };
     doctorProfile = (e)=>{
         this.setState({

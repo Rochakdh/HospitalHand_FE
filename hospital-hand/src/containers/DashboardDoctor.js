@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
 import {Input,Table,Icon,Button} from 'semantic-ui-react'
-import ModalExampleBasic from './DashboardAddDoctor'
+import DashboardAddDoctor from './DashboardAddDoctor'
 import DashboardDoctorAppointmentDetail from './DashboardDoctorAppointmentDetail'
+import setup from '../api/setup'
+
 const color = "teal"
 
 
 export default class DashboardDoctor extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            open:false,
+            setOpen:false
+        }
+    }
     render() {
         return (
             <>
                 <div className="hospital-work">
                     <h3>Doctor List</h3>
-                    <ModalExampleBasic />
+                    <DashboardAddDoctor open={this.state.open} setOpen={this.state.setOpen} onClose={this.onClose} />
                     <Input icon="search" placeholder="Search Doctor"></Input>
                     <Table color={color} key={color} inverted>
                         <Table.Header>
