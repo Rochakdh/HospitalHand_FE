@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import {Redirect} from 'react-router-dom'
 import validation from '../api/setup';
-import Profile from './Profile';
 
 export default class LoginForm extends Component {
     constructor(props){
@@ -20,7 +19,6 @@ export default class LoginForm extends Component {
         }
         this.onChange = this.onChange.bind(this)
         this.loginFormSubmit = this.loginFormSubmit.bind(this)
-        // this.userProfile = this.props.userProfile.bind(this)
     };
     onChange = (e)=>{
         this.setState({
@@ -43,7 +41,7 @@ export default class LoginForm extends Component {
             console.log(userid);
             const token = response.data.token
             const is_hospital = response.data.loginflag
-            if (token && !is_hospital){
+            if (token && is_hospital){
                 localStorage.setItem("token",token)
                 this.setState({
                     loggedIn : true,
@@ -51,6 +49,11 @@ export default class LoginForm extends Component {
                 });
                 console.log(userid)
                 this.props.userProfile(userid)
+            }
+            else{
+                this.setState({
+                    errorMessage:"Hey! You Provided Us Wrong Details",
+                });
             }
           })
           .catch( (error) => {
@@ -63,14 +66,13 @@ export default class LoginForm extends Component {
     };
     render() {
         if(this.state.loggedIn === true ){
-            return <Redirect to='/'></Redirect>
+            return <Redirect to='/hospital/'></Redirect>
         }
         return (
             <div>
-                <div className="backgroundImage">
-                    <div className="bgColor">
-                        < Nav/>
-                        <div className='homeContent'>
+                <div className="backgroundImageHospital">
+                    <div className="bgColorHospital">
+                        <div className='homeContentHospital'>
                             <h1>Login</h1>
                             { this.state.errorMessage && <h4 className="error"> { this.state.errorMessage } </h4> }
                             {/* { this.props.location.state.message && <h4 className="error"> { this.props.location.state.message } </h4> } */}

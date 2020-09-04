@@ -21,18 +21,8 @@ export default class ProfileButtons extends Component {
         })
     }
     updateProfile = (e) =>{
-        // console.log(e)
-        // this.setState({
-        //     isUpdate:true 
-        // })
         this.props.getUpdateStatus()
     }
-    // getProfile = (e) =>{
-    //     this.setState({
-    //         isUpdate:true 
-    //     })
-    //     this.props.getUpdateStatus(true)
-    // }
     
     render() {
         if (this.state.loggedIn===false){

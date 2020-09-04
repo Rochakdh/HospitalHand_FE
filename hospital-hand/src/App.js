@@ -13,7 +13,8 @@ import Profile from './containers/Profile';
 import SignUp from './containers/SignUp';
 import Notice from './containers/Notice';
 import AuthenticatedUser from './api/Authenticated'
-
+import Dashboard from './containers/Dashboard';
+import DashboardLogin from './containers/DashboardLogin'
 
 export default class App extends Component {
 
@@ -56,7 +57,12 @@ export default class App extends Component {
         <Route path='/notices' exact component={Notice}>
           <Notice />
         </Route>
-
+        <Route path='/hospital/login' exact component={Dashboard}>
+          <DashboardLogin />
+        </Route>
+        <Route path='/hospital/' exact component={Dashboard}>
+          <Dashboard />
+        </Route>
       </Router>
 
 

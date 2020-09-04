@@ -37,7 +37,8 @@ nav{
 .nav-links a{
     color: white;
 }
-.nav-links a:visited,.active{
+/* .active */
+.nav-links, a:visited{
     background-color: #0cb8b6;
     border-radius: 10px;
     color:white;
@@ -102,7 +103,7 @@ nav{
     margin: 5px;
 }
 
-.flex-wrapper{
+/* .flex-wrapper{
     display:inline-flex;
     width: 100%;
     
@@ -134,7 +135,7 @@ nav{
     height: 80px;
     border-radius: 10px;
     
-}
+} */
 
 .headig,.user-info,.user-appointment{
     display: inline-flex;
@@ -350,4 +351,78 @@ nav{
     border-radius: 5px;
     color: white;
 
+}
+.side-bar-left{
+    height: 500px;
+}
+.vertical-nav a{
+    margin: 20px;
+    padding: 10px;
+    color: white;
+}
+.vertical-nav a:visited{
+    color: white;
+}
+.side-bar-right{
+    padding-left: 0px;
+}
+.hospital-info{
+    background:#0cb8b6;
+    height: auto;
+    color: white !important;
+    padding: 15px 50px 20px 50px;
+    font-size: 18px;
+
+}
+.ui.sidebar.menu .item {
+    border-radius: 0!important;
+    padding: 30px !important;
+}
+.navbar-brand{
+    padding-left: 100px;
+}
+.hospital-work{
+    padding: 40px 60px;
+    margin: 0px;
+}
+.hospital-work-flex{
+    background-color: turquoise;
+    padding: 30px;
+    text-align: center;
+    margin: 5px;
+    display: inline;
+    margin: 10px;
+    max-width: 30%;
+    border-radius: 10px;
+}
+.ui.thin.left.sidebar, .ui.thin.right.sidebar {
+    width: 100%;
+}
+.modals.dimmer .ui.scrolling.modal {
+    margin: 1rem auto;
+    position: relative;
+}
+.backgroundImageHospital{
+    background: url(containers/hospital.jpg);
+	height: 600px;
+    /* background-position: center; */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bgColorHospital{
+    background-color: rgba(0, 38, 49, 0.8);;
+	margin:0px;
+    height:600px;
+}
+
+.homeContentHospital{
+    text-align: center;
+    color: white;
+    padding: 80px;
+    font-size: 18px;
+}
+.homeContentHospital h1{
+    font-size: 40px;
+    padding: 0px;
+    margin-bottom: 30px;
 }
