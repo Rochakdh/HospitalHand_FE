@@ -60,6 +60,8 @@ export default class Appointment extends Component {
                     console.log(this.state)
 
 
+
+
                     if (response.status === 201) {
                         alert('Appointment Sucess !! Check Your Profile Or Appoint More')
                         this.setState({

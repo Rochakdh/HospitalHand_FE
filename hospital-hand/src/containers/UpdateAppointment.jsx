@@ -8,7 +8,7 @@ export default class UpdateAppointment extends Component {
 
     state = {
         id: this.props.id,
-        
+
     }
 
 
@@ -26,16 +26,16 @@ export default class UpdateAppointment extends Component {
             [event.target.name]: event.target.value,
             id: this.props.id,
 
-
-
         });
+
+
         console.log(this.state)
     }
 
     onFormSubmit = (e) => {
         e.preventDefault();
 
-        Axios.put(`http://127.0.0.1:8000/appointment/profile/update/${this.state.id}`, this.state)
+        Axios.patch(`http://127.0.0.1:8000/appointment/profile/update/${this.state.id}`, this.state)
             .then((response) => {
 
                 if (response.status === 200) {
