@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label, TextArea } from 'semantic-ui-react';
 import axios from "axios";
 
 import { Modal} from 'semantic-ui-react'
@@ -16,19 +16,17 @@ export default class UpdateNotice extends Component {
   };
   up_notice = (id) => {
       console.log(id)
-    axios.put(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then((response) => {
-
-      if (response.status === 200) {
-          alert('Notice Updated! Refresh To See Changes')
-
-    }}
-    )};
+    axios.put(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then((response)=>{
+      if (response.status===200){
+         alert('Notice Updated! ')
+         window.location.reload()
+      }});}
   render() {
     const modalStyle = {
 
       backgroundColor: 'teal',
-      marginLeft: 30 + "em",
-      marginTop: 7 + "em",
+      // marginLeft: 30 + "em",
+      // marginTop: 7 + "em",
       height: 'auto',
       width: 35 + "em",
 
@@ -55,7 +53,7 @@ export default class UpdateNotice extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="description">Description:</Label>
-            <Input
+            <TextArea
               type="text"
               name="description"
               onChange={this.onChange}

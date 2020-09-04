@@ -59,7 +59,7 @@ class List extends React.Component {
     .then((response) => {
 
       if (response.status === 200) {
-          alert('Notice Deleted! Refresh To See Changes')
+          alert('Notice Deleted! ')
 
     }}
     )

@@ -28,9 +28,9 @@ class NewNoticeForm extends React.Component {
     };
   
     createnotice = e => {
+      e.preventDefault();
       
       axios.post(API_URL1, this.state).then((response)=>{
-        e.preventDefault();
          if (response.status===201){
             alert('Notice Created! ')
             window.location.reload()

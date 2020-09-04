@@ -12,8 +12,8 @@ export default class DetailNotice extends Component {
     const modalStyle = {
 
       backgroundColor: 'teal',
-      marginLeft: 30 + "em",
-      marginTop: 7 + "em",
+      // marginLeft: 30 + "em",
+      // marginTop: 7 + "em",
       height: 'auto',
       width: 35 + "em",
 
