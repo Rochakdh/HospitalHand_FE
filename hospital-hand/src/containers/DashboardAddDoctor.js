@@ -8,21 +8,12 @@ export default class DashboardAddDoctor extends Component {
     constructor(props){
         super(props)
         this.state={
-            allDepartment: [],
+            allDepartment: this.props.data,
             setOpen:false,
             // open:false,
             department: "",
         }
-        setup.get('/categories/alldepartment/',null)
-        .then( (response) => {
-            this.setState({
-                allDepartment : response.data
-            })
-            console.log(response.data)
-        })
-        .catch( (error) => {
-            console.log(error)
-        });  
+        
 
     };
     selectedDepartment = (item, index) => {
@@ -71,18 +62,19 @@ export default class DashboardAddDoctor extends Component {
                             <input placeholder='Phone No.' type='number' />
                             </Form.Field>
                             <Form.Field>
-                            <label>Choose Department</label>
                             
-                            <select>
-                                {
-                                    this.state.allDepartment.map((item, index) =>
-                                        <option value={index} onClick={this.selectedDepartment.bind(this, item, index)}>
-                                            {item}
-                                        </option>
+                            <label>Choose Department</label>
+                                <select>
+                                    
+                                    {
+                                        this.state.allDepartment.map((item, index) =>
+                                            <option value={index} onClick={this.selectedDepartment.bind(this, item, index)}>
+                                                {item}
+                                            </option>
 
-                                    )
-                                }
-                            </select>
+                                        )
+                                    }
+                                </select>
                             </Form.Field>
                             <br />
                             <Button basic color='red' inverted onClick={() => this.setState({setOpen:false})} >

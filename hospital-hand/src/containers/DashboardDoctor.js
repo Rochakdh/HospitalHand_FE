@@ -11,16 +11,25 @@ export default class DashboardDoctor extends Component {
     constructor(props){
         super(props)
         this.state={
-            open:false,
-            setOpen:false
+            allDepartment:[]
         }
+        setup.get('/categories/alldepartment/',null)
+        .then( (response) => {
+            this.setState({
+                allDepartment : response.data
+            })
+            console.log(response.data)
+        })
+        .catch( (error) => {
+            console.log(error)
+        });  
     }
     render() {
         return (
             <>
                 <div className="hospital-work">
                     <h3>Doctor List</h3>
-                    <DashboardAddDoctor open={this.state.open} setOpen={this.state.setOpen} onClose={this.onClose} />
+                    <DashboardAddDoctor data={this.state.allDepartment}  />
                     <Input icon="search" placeholder="Search Doctor"></Input>
                     <Table color={color} key={color} inverted>
                         <Table.Header>
