@@ -1,55 +1,67 @@
 import React, { Component } from 'react'
 import { Icon, Menu, Button, Sidebar } from 'semantic-ui-react'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import DashboardHome from './DashboardHome'
 import DashboardDoctor from './DashboardDoctor'
 import DashboardPatient from './DashboardPatient'
+import Axios from 'axios'
 
 export default class Dashboard extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props)
         let loggedIn = true
         let token = localStorage.getItem('token')
-        if (token === null){
+        if (token === null) {
             loggedIn = false
         }
-        this.state={
-            isHome:true,
-            isDoctor:false,
-            isAppointment:false,
-            isnotice:false,
+        this.state = {
+            isHome: true,
+            isDoctor: false,
+            isAppointment: false,
+            isnotice: false,
             loggedIn
-            
+
         }
-        
+
     };
-    doctorProfile = (e)=>{
+    doctorProfile = (e) => {
         this.setState({
-            isHome:false,
-            isDoctor:true  
+            isHome: false,
+            isDoctor: true
         })
     }
-    homeProfile = (e)=>{
+    homeProfile = (e) => {
         this.setState({
-            isHome:true, 
+            isHome: true,
         })
     }
-    appointmentProfile = (e)=>{
+    appointmentProfile = (e) => {
         this.setState({
-            isAppointment:true,
-            isHome:false,
-            isDoctor:false   
+            isAppointment: true,
+            isHome: false,
+            isDoctor: false
         })
+
+        Axios.get(`http://127.0.0.1:8000/appointment/hospital/`)
+            .then(appointments => {
+                this.setState({
+                    appointments: appointments.data,
+
+                })
+                console.log(appointments.data);
+
+
+
+            })
     }
-    logout = (e) =>{
+    logout = (e) => {
         localStorage.removeItem("token")
         this.setState({
-            loggedIn:false
+            loggedIn: false
         })
     }
     render() {
-        if (this.state.loggedIn===false){
+        if (this.state.loggedIn === false) {
             return <Redirect to='/hospital/login/'> </Redirect>
         }
         return (
@@ -66,7 +78,7 @@ export default class Dashboard extends Component {
                                 visible
                                 width='thin'
                                 className="col-md-2"
-                                >
+                            >
                                 <Menu.Item as='a' onClick={this.homeProfile}>
                                     <Icon name='home' />
                                     Home
@@ -95,10 +107,10 @@ export default class Dashboard extends Component {
                                 </nav>
                             </div>
                             {/* {(this.state.isHome) ?  )} */}
-                            {(this.state.isHome) ? <DashboardHome />:(this.state.isDoctor)?<DashboardDoctor />:<DashboardPatient /> }
-                            
-                            
-                            
+                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : <DashboardPatient />}
+
+
+
 
                         </div>
                     </div>
