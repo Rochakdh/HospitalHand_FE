@@ -1,5 +1,6 @@
 // import NewStudentModal from "./NewStudentModal";
 import 'semantic-ui-css/semantic.min.css'
+import { Button} from 'semantic-ui-react';
 
 import React from 'react'
 import axios from "axios";
@@ -106,18 +107,18 @@ class List extends React.Component {
                 <td data-label="Title" >{notice.title}</td>
                 <td data-label="Action">
 
-                  <button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description, notice.post_at)} > Detail</button>
+                  <Button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description, notice.post_at)} > Detail</Button>
 
-                  <button type="submit" onClick={this.update_data.bind(this, notice.id, notice.title, notice.description, notice.post_at)}>Update</button>
+                  <Button type="submit" onClick={this.update_data.bind(this, notice.id, notice.title, notice.description, notice.post_at)}>Update</Button>
 
-                  <button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</button>
+                  <Button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</Button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div>
-          <a href="/createnotice/"><button>Create Notice</button></a>
+          <a href="/createnotice/"><Button>Create Notice</Button></a>
         </div>
       </div>
     )
