@@ -43,14 +43,11 @@ export default class ProfileTable extends Component {
 
     }
 
-    updateAppointment = (id, patient_name, doctor_requested, select_hospital, appointment_time, appointment_date) => {
+    updateAppointment = (id, patient_name, doctor_requested, select_hospital) => {
 
         this.setState({
             id: id,
             updateappointOpen: true,
-
-            appointment_date: appointment_date,
-            appointment_time: appointment_time,
             doctor_requested: doctor_requested,
             select_hospital: select_hospital,
             patient_name: patient_name
@@ -89,11 +86,11 @@ export default class ProfileTable extends Component {
 
     render() {
 
-        const { updateappointOpen, deleteappointOpen, id, patient_name, doctor_requested, select_hospital, appointment_time, appointment_date } = this.state
+        const { updateappointOpen, deleteappointOpen, id, patient_name, doctor_requested, select_hospital} = this.state
 
         return (
             <div>
-                <UpdateAppointment updateappointOpen={updateappointOpen} onClose={this.onCloseUpdateAppointment} id={id} patient_name={patient_name} doctor_requested={doctor_requested} select_hospital={select_hospital} appointment_time={appointment_time} appointment_date={appointment_date}></UpdateAppointment>
+                <UpdateAppointment updateappointOpen={updateappointOpen} onClose={this.onCloseUpdateAppointment} id={id} patient_name={patient_name} doctor_requested={doctor_requested} select_hospital={select_hospital} ></UpdateAppointment>
                 <DeleteAppointment deleteappointOpen={deleteappointOpen} onClose={this.onCloseDeleteAppointment} id={id} ></DeleteAppointment>
 
 
@@ -119,12 +116,12 @@ export default class ProfileTable extends Component {
                                 <Table.Row >
                                     <Table.Cell>{app.doctor_requested}</Table.Cell>
                                     <Table.Cell>{app.select_hospital}</Table.Cell>
-                                    <Table.Cell>{app.appointment_date}</Table.Cell>
-                                    <Table.Cell>{app.appointment_time}</Table.Cell>
+                                    <Table.Cell>Receive</Table.Cell>
+                                    <Table.Cell>Garne</Table.Cell>
                                     <Table.Cell>No</Table.Cell>
                                     <Table.Cell>
 
-                                        <Button onClick={this.updateAppointment.bind(this, app.id, app.patient_name, app.doctor_requested, app.select_hospital, app.appointment_time, app.appointment_date)}>
+                                        <Button onClick={this.updateAppointment.bind(this, app.id, app.patient_name, app.doctor_requested, app.select_hospital)}>
                                             Update
                                             </Button>
 

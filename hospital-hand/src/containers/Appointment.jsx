@@ -17,8 +17,6 @@ export default class Appointment extends Component {
         patient_problem_description: '',
         medicines_taken: '',
         doctor_requested: '',
-        appointment_time: '',
-        appointment_date: '',
         select_hospital: '',
         hiddenProfile: true
 
@@ -150,14 +148,14 @@ export default class Appointment extends Component {
                             <label style={labelStyle}>Medicines Taken</label>
                             <input name="medicines_taken" onChange={this.handleChange}></input>
                         </Form.Field>
-                        <Form.Field required>
+                        {/* <Form.Field required>
                             <label aria-required style={labelStyle}>Appointment Date</label>
                             <input name="appointment_date" onChange={this.handleChange} type="date"></input>
                         </Form.Field>
                         <Form.Field required>
                             <label aria-required style={labelStyle}>Appointment Time</label>
                             <input name="appointment_time" onChange={this.handleChange} type="time"></input>
-                        </Form.Field>
+                        </Form.Field> */}
 
 
                         <Button type='submit' color='green' inverted >

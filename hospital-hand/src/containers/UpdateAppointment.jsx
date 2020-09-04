@@ -69,7 +69,7 @@ export default class UpdateAppointment extends Component {
 
         };
 
-        const { id, updateappointOpen, patient_name, doctor_requested, select_hospital, appointment_time, appointment_date } = this.props
+        const { id, updateappointOpen, patient_name, doctor_requested, select_hospital} = this.props
 
 
 
@@ -83,14 +83,14 @@ export default class UpdateAppointment extends Component {
                                 <label>Name Registered For Appointment</label>
                                 <Input name='patient_name' onChange={this.onChangeAppoint} placeholder='Patient Name' defaultValue={patient_name} />
                             </Form.Field>
-                            <Form.Field width={20} required>
+                            {/* <Form.Field width={20} required>
                                 <label>Date Registered For Appointment</label>
                                 <Input name='appointment_date' onChange={this.onChangeAppoint} type='date' defaultValue={appointment_date} />
                             </Form.Field>
                             <Form.Field width={20} required>
                                 <label>Time Registered For Appointment</label>
                                 <Input name='appointment_time' onChange={this.onChangeAppoint} type='time' defaultValue={appointment_time} />
-                            </Form.Field>
+                            </Form.Field> */}
 
 
                             <Button type='submit'>Update Appointment</Button>
