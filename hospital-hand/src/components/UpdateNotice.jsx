@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
 
-import { Modal, Image } from 'semantic-ui-react'
+import { Modal} from 'semantic-ui-react'
 
 export default class UpdateNotice extends Component {
   onClose = () => {
@@ -16,16 +16,29 @@ export default class UpdateNotice extends Component {
   };
   up_notice = (id) => {
       console.log(id)
-    axios.put(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then(() => {
-      // this.props.resetState();
-      
-    });
-  };
+    axios.put(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then((response) => {
+
+      if (response.status === 200) {
+          alert('Notice Updated! Refresh To See Changes')
+
+    }}
+    )};
   render() {
+    const modalStyle = {
+
+      backgroundColor: 'teal',
+      marginLeft: 30 + "em",
+      marginTop: 7 + "em",
+      height: 'auto',
+      width: 35 + "em",
+
+
+
+  };
     const { isUpdateOpen, id, title, description, post_at} = this.props
     return (
       <div>
-        <Modal open={isUpdateOpen} onClose={this.onClose}>
+        <Modal style={modalStyle} open={isUpdateOpen} onClose={this.onClose}>
           <Modal.Header>{title}</Modal.Header>
           <Modal.Content>
 

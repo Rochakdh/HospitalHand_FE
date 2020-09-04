@@ -1,15 +1,10 @@
 // import NewStudentModal from "./NewStudentModal";
 import 'semantic-ui-css/semantic.min.css'
-import {
-  Container,
-  Header,
-  able,
-  Button
-} from 'semantic-ui-react'
+
 import React from 'react'
 import axios from "axios";
 
-import { API_URL2, API_URL3 } from "../constants";
+import { API_URL2} from "../constants";
 import DetailNotice from './DetailNotice';
 import UpdateNotice from './UpdateNotice'
 // import {Link, RichText, Date} from 'prismic-reactjs';
@@ -35,12 +30,13 @@ class List extends React.Component {
       })
 
   }
-  detail_data(id, title, description) {
+  detail_data(id, title, description,post_at) {
     this.setState({
       isDetailOpen: true,
       id: id,
       title: title,
-      description: description
+      description: description,
+      post_at:post_at
 
     })
 
@@ -59,8 +55,16 @@ class List extends React.Component {
 
   del_data(id) {
     console.log(id);
-    axios.delete(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then(window.location.reload())
+    axios.delete(`http://localhost:8000/notice/update_delete/${id}/`, this.state)
+    .then((response) => {
 
+      if (response.status === 200) {
+          alert('Notice Deleted! Refresh To See Changes')
+
+    }}
+    )
+    .then(window.location.reload())
+    
   };
   onDetailClose = () => {
     this.setState({
@@ -78,7 +82,7 @@ class List extends React.Component {
   render() {
     const { isDetailOpen } = this.state
     const { isUpdateOpen } = this.state
-    const { id, title, description } = this.state
+    const { id, title, description, post_at } = this.state
 
 
 
@@ -86,8 +90,8 @@ class List extends React.Component {
       <div>
 
 
-        <DetailNotice id={id} title={title} description={description} isDetailOpen={isDetailOpen} onDetailClose={this.onDetailClose} ></DetailNotice>
-        <UpdateNotice id={id} title={title} description={description} isUpdateOpen={isUpdateOpen} onUpdateClose={this.onUpdateClose}></UpdateNotice>
+        <DetailNotice id={id} title={title} description={description} post_at={post_at} isDetailOpen={isDetailOpen} onDetailClose={this.onDetailClose} ></DetailNotice>
+        <UpdateNotice id={id} title={title} description={description} post_at={post_at} isUpdateOpen={isUpdateOpen} onUpdateClose={this.onUpdateClose}></UpdateNotice>
         <table className="ui celled table">
           <thead>
             <tr>
@@ -102,10 +106,12 @@ class List extends React.Component {
                 <td data-label="Title" >{notice.title}</td>
                 <td data-label="Action">
 
-                  <button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description)} > Detail</button>
+                  <button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description, notice.post_at)} > Detail</button>
 
                   <button type="submit" onClick={this.update_data.bind(this, notice.id, notice.title, notice.description, notice.post_at)}>Update</button>
-                  <button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</button></td>
+
+                  <button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
