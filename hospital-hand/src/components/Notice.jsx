@@ -7,14 +7,19 @@ import axios from "axios";
 
 import { API_URL1 } from "../constants/index";
 
+const initialstate={
+      title_error: '',
+      desc_error: '',
+      date_error: '',
 
-class NewNoticeForm extends React.Component {
-    state = {
-      error_message: '',
       title: "",
       description: "",
       post_at: ""
-    };
+}
+
+class NewNoticeForm extends React.Component {
+    state =
+      initialstate;
   
     componentDidMount() {
       if (this.props.notice) {
@@ -29,6 +34,11 @@ class NewNoticeForm extends React.Component {
   
     createnotice = e => {
       e.preventDefault();
+      const isValid=this.validate();
+      if (isValid){
+        console.log(this.state)
+        this.setState(initialstate)
+      }
       
       axios.post(API_URL1, this.state).then((response)=>{
          if (response.status===201){
@@ -38,18 +48,26 @@ class NewNoticeForm extends React.Component {
   
     }
       )
-      .catch((error) => {
-        console.log(error.response.data);
-        let errorData = error.response.data
-        for (var errorMsg in errorData) {
-            if (errorData.hasOwnProperty(errorMsg)) {
-                this.setState({
-                    error_message: errorData[errorMsg]
-                });
-            }
-        }})
+      
     };
   
+
+    validate=()=>{
+      if (!this.state.title){
+        this.setState({title_error:'Input fields cannot be empty'})
+        console.log(this.state.title_error)
+        return false
+      }
+      if (!this.state.description){
+        this.setState({desc_error:'Input fields cannot be empty'})
+        return false
+      }
+      if (!this.state.post_at){
+        this.setState({date_error:'Input fields cannot be empty'})
+        return false
+      }
+      return true
+    }
     
     defaultIfEmpty = value => {
       return value === "" ? "" : value;
@@ -74,12 +92,11 @@ class NewNoticeForm extends React.Component {
       
     </Header>
     </div>
-    <a href='/noticelist/'  style={{paddingLeft:130+'em' , size:30} }>
+    <a href='/noticelist/'  style={{paddingLeft:110+'em' , size:40} }>
     <Icon name='list' rectangular />
         Notice List
     </a>
-    {this.state.error_message &&
-                            <h3 className="error"> {this.state.error_message} </h3>}
+    
           
           <Form style={formStyle} onSubmit={this.createnotice}  >
           <Form.Field style={{width:1000}} required>
@@ -91,6 +108,9 @@ class NewNoticeForm extends React.Component {
               placeholder="Title"
               value={this.defaultIfEmpty(this.state.name)}
             />
+            <div style={{color:'crimson', fontSize:12}}>
+            {this.state.title_error}
+          </div>
           </Form.Field>
           <Form.Field style={{width:1000}}>
             <Label size='large' for="description">Description:</Label>
@@ -101,6 +121,10 @@ class NewNoticeForm extends React.Component {
               placeholder="Description"
               value={this.defaultIfEmpty(this.state.description)}
             />
+            <div style={{color:'crimson', fontSize:12}}>
+            {this.state.desc_error}
+          </div>
+            
           </Form.Field>
           
           <Form.Field style={{width:500}}>
@@ -113,6 +137,9 @@ class NewNoticeForm extends React.Component {
             />
           </Form.Field>
           <Button size='big' >Post</Button>
+          <div style={{color:'crimson', fontSize:12}}>
+            {this.state.date_error}
+          </div>
         </Form>
         </div>
       );
