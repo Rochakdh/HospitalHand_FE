@@ -1,42 +1,37 @@
 import React, { Component } from 'react'
-import { Button, Header, Icon, Modal,Form } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
 import setup from '../api/setup'
 
 
 
 export default class DashboardAddDoctor extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            allDepartment: this.props.data,
-            setOpen:false,
+        this.state = {
+
+            setOpen: false,
             // open:false,
             department: "",
+
         }
-        
+
 
     };
-    selectedDepartment = (item, index) => {
-        this.setState({department:item})
+    selectedDepartment = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+        console.log(this.state.allDepartment)
+
     }
     render() {
+
+        const { allDepartment, isAddOpen, onClose } = this.props
         return (
             <>
                 <Modal
-                basic
-                onClose={() => this.setState({setOpen:false})}
-                onOpen={() => this.setState({setOpen:true})}
-                open={this.state.setOpen}
-                size='small'
-                trigger={<Button
-                    floated='right'
-                    icon = 'doctor'
-                    labelPosition='left'
-                    color='teal'
-                    size='small'
-                >
-                    <Icon name='user' /> Add User
-                </Button>}
+                    basic
+                    open={isAddOpen}
+
+
                 >
                     <Header icon>
                         <Icon name='calendar plus' />
@@ -44,32 +39,31 @@ export default class DashboardAddDoctor extends Component {
                     </Header>
                     <Modal.Content>
                         <p>
-                        Fix Appointment Date And Time
+                            Fix Appointment Date And Time
                         </p>
                     </Modal.Content>
                     <Modal.Actions>
                         <Form>
                             <Form.Field>
-                            <label>Date</label>
-                            <input placeholder='Full Name' type='text' />
+                                <label>Date</label>
+                                <input placeholder='Full Name' type='text' />
                             </Form.Field>
                             <Form.Field>
-                            <label>Email</label>
-                            <input placeholder='Email' type='email' />
+                                <label>Email</label>
+                                <input placeholder='Email' type='email' />
                             </Form.Field>
                             <Form.Field>
-                            <label>Contact</label>
-                            <input placeholder='Phone No.' type='number' />
+                                <label>Contact</label>
+                                <input placeholder='Phone No.' type='number' />
                             </Form.Field>
                             <Form.Field>
-                            
-                            <label>Choose Department</label>
-                                <select>
-                                    
+
+                                <select onChange={this.selectedDepartment}>
+
                                     {
-                                        this.state.allDepartment.map((item, index) =>
-                                            <option value={index} onClick={this.selectedDepartment.bind(this, item, index)}>
-                                                {item}
+                                        allDepartment.map(department =>
+                                            <option value={department.id} >
+                                                {department.department_name}
                                             </option>
 
                                         )
@@ -77,17 +71,17 @@ export default class DashboardAddDoctor extends Component {
                                 </select>
                             </Form.Field>
                             <br />
-                            <Button basic color='red' inverted onClick={() => this.setState({setOpen:false})} >
+                            <Button basic color='red' inverted onClick={onClose} >
                                 <Icon name='remove' /> No
                                 </Button>
-                                <Button color='green' inverted onClick={() => this.setState({setOpen:false})}>
+                            <Button color='green' inverted onClick={() => this.setState({ setOpen: false })}>
                                 <Icon name='checkmark' /> Yes
                             </Button>
                         </Form>
                     </Modal.Actions>
                 </Modal>
             </>
-            
+
         )
     }
 }
