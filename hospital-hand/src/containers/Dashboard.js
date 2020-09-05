@@ -9,6 +9,28 @@ import Axios from 'axios'
 
 
 export default class Dashboard extends Component {
+
+    state = {
+        appointments: []
+    }
+
+    componentDidMount() {
+        const token = localStorage.getItem("token")
+        console.log(token)
+
+        Axios.get(`http://127.0.0.1:8000/appointment/hospital/${token}`)
+            .then((appointments) => {
+                this.setState({
+                    appointments: appointments.data,
+
+                })
+                console.log(appointments.data);
+
+
+
+            })
+    }
+
     constructor(props) {
         super(props)
         let loggedIn = true
@@ -16,11 +38,11 @@ export default class Dashboard extends Component {
         if (token === null) {
             loggedIn = false
         }
-        this.state={
-            isHome:true,
-            isDoctor:false,
-            isAppointment:false,
-            isnotice:false,
+        this.state = {
+            isHome: true,
+            isDoctor: false,
+            isAppointment: false,
+            isnotice: false,
             loggedIn,
             userId:this.props.userId
             // departments:''
@@ -44,17 +66,7 @@ export default class Dashboard extends Component {
             isDoctor: false
         })
 
-        Axios.get(`http://127.0.0.1:8000/appointment/hospital/`)
-            .then(appointments => {
-                this.setState({
-                    appointments: appointments.data,
 
-                })
-                console.log(appointments.data);
-
-
-
-            })
     }
     logout = (e) => {
         localStorage.removeItem("token")
@@ -66,6 +78,9 @@ export default class Dashboard extends Component {
         if (this.state.loggedIn === false) {
             return <Redirect to='/hospital/login/'> </Redirect>
         }
+
+
+
         return (
             <>
                 <div className="side-bar">
@@ -109,7 +124,7 @@ export default class Dashboard extends Component {
                                 </nav>
                             </div>
                             {/* {(this.state.isHome) ?  )} */}
-                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor userId={this.state.userId} /> : <DashboardPatient />}
+                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : <DashboardPatient data={this.state.appointments} />}
 
 
 
