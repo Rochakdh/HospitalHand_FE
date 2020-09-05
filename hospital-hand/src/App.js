@@ -51,6 +51,7 @@ export default class App extends Component {
         <Route path='/profile' exact component={Profile}>
           <Profile />
         </Route>
+
         <Route path='/signup' exact component={SignUp}>
           <SignUp />
         </Route>
