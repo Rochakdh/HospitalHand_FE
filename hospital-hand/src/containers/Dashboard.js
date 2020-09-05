@@ -22,6 +22,7 @@ export default class Dashboard extends Component {
             isAppointment:false,
             isnotice:false,
             loggedIn,
+            userId:this.props.userId
             // departments:''
         }
     };
@@ -108,7 +109,7 @@ export default class Dashboard extends Component {
                                 </nav>
                             </div>
                             {/* {(this.state.isHome) ?  )} */}
-                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : <DashboardPatient />}
+                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor userId={this.state.userId} /> : <DashboardPatient />}
 
 
 

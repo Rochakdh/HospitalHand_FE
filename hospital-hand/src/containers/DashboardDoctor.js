@@ -11,7 +11,8 @@ export default class DashboardDoctor extends Component {
 
     state = {
         isAddOpen: false,
-        allDepartment: []
+        allDepartment: [],
+        userId:this.props.userId,
 
     }
 

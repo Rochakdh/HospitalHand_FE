@@ -15,7 +15,8 @@ export default class LoginForm extends Component {
             username:'',
             password:'',
             loggedIn,
-            errorMessage:''
+            errorMessage:'',
+            userId:''
         }
         this.onChange = this.onChange.bind(this)
         this.loginFormSubmit = this.loginFormSubmit.bind(this)
@@ -45,10 +46,10 @@ export default class LoginForm extends Component {
                 localStorage.setItem("token",token)
                 this.setState({
                     loggedIn : true,
-                    username: userid,
+                    userId: userid,
                 });
                 console.log(userid)
-                this.props.userProfile(userid)
+                // this.props.userProfile(userid)
             }
             else{
                 this.setState({
