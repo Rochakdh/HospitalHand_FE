@@ -19,6 +19,8 @@ export default class ProfileTable extends Component {
         appointment_time: "",
         select_hospital: "",
         doctor_requested: "",
+        patient_problem_description: "",
+        medicines_taken: "",
 
         updateappointOpen: false,
         deleteappointOpen: false
@@ -43,14 +45,16 @@ export default class ProfileTable extends Component {
 
     }
 
-    updateAppointment = (id, patient_name, doctor_requested, select_hospital) => {
+    updateAppointment = (id, patient_name, doctor_requested, select_hospital, patient_problem_description, medicines_taken) => {
 
         this.setState({
             id: id,
             updateappointOpen: true,
             doctor_requested: doctor_requested,
             select_hospital: select_hospital,
-            patient_name: patient_name
+            patient_name: patient_name,
+            patient_problem_description: patient_problem_description,
+            medicines_taken: medicines_taken
         })
     }
 
@@ -86,11 +90,11 @@ export default class ProfileTable extends Component {
 
     render() {
 
-        const { updateappointOpen, deleteappointOpen, id, patient_name, doctor_requested, select_hospital} = this.state
+        const { updateappointOpen, deleteappointOpen, id, patient_name, doctor_requested, select_hospital, patient_problem_description, medicines_taken } = this.state
 
         return (
             <div>
-                <UpdateAppointment updateappointOpen={updateappointOpen} onClose={this.onCloseUpdateAppointment} id={id} patient_name={patient_name} doctor_requested={doctor_requested} select_hospital={select_hospital} ></UpdateAppointment>
+                <UpdateAppointment updateappointOpen={updateappointOpen} onClose={this.onCloseUpdateAppointment} id={id} patient_name={patient_name} doctor_requested={doctor_requested} select_hospital={select_hospital} patient_problem_description={patient_problem_description} medicines_taken={medicines_taken} ></UpdateAppointment>
                 <DeleteAppointment deleteappointOpen={deleteappointOpen} onClose={this.onCloseDeleteAppointment} id={id} ></DeleteAppointment>
 
 
@@ -121,7 +125,7 @@ export default class ProfileTable extends Component {
                                     <Table.Cell>No</Table.Cell>
                                     <Table.Cell>
 
-                                        <Button onClick={this.updateAppointment.bind(this, app.id, app.patient_name, app.doctor_requested, app.select_hospital)}>
+                                        <Button onClick={this.updateAppointment.bind(this, app.id, app.patient_name, app.doctor_requested, app.select_hospital, app.patient_problem_description, app.medicines_taken)}>
                                             Update
                                             </Button>
 

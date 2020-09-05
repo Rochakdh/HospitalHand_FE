@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Nav from './Nav'
-import { Form, Input, Button, Modal } from 'semantic-ui-react'
+import { Form, Input, Button, Modal, TextArea } from 'semantic-ui-react'
 import Axios from 'axios'
 
 
@@ -69,7 +69,7 @@ export default class UpdateAppointment extends Component {
 
         };
 
-        const { id, updateappointOpen, patient_name, doctor_requested, select_hospital} = this.props
+        const { id, updateappointOpen, patient_name, doctor_requested, select_hospital, patient_problem_description, medicines_taken } = this.props
 
 
 
@@ -83,14 +83,14 @@ export default class UpdateAppointment extends Component {
                                 <label>Name Registered For Appointment</label>
                                 <Input name='patient_name' onChange={this.onChangeAppoint} placeholder='Patient Name' defaultValue={patient_name} />
                             </Form.Field>
-                            {/* <Form.Field width={20} required>
-                                <label>Date Registered For Appointment</label>
-                                <Input name='appointment_date' onChange={this.onChangeAppoint} type='date' defaultValue={appointment_date} />
+                            <Form.Field width={20} required>
+                                <label>Patient Problem Description</label>
+                                <TextArea name='patient_problem_description' onChange={this.onChangeAppoint} defaultValue={patient_problem_description} />
                             </Form.Field>
                             <Form.Field width={20} required>
-                                <label>Time Registered For Appointment</label>
-                                <Input name='appointment_time' onChange={this.onChangeAppoint} type='time' defaultValue={appointment_time} />
-                            </Form.Field> */}
+                                <label>Medicines Taken</label>
+                                <TextArea name='medicines_taken' onChange={this.onChangeAppoint} defaultValue={medicines_taken} />
+                            </Form.Field>
 
 
                             <Button type='submit'>Update Appointment</Button>
