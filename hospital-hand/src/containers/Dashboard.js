@@ -22,6 +22,8 @@ export default class Dashboard extends Component {
             //     })
             //     console.log(appointments.data);
 
+        //         })
+        //         console.log(appointments.data);
 
 
             // })
@@ -31,6 +33,7 @@ export default class Dashboard extends Component {
         super(props)
         let loggedIn = true
         let token = localStorage.getItem('token')
+        // let userid = localStorage.getItem('userid')
         if (token === null) {
             loggedIn = false
         }
@@ -84,6 +87,8 @@ export default class Dashboard extends Component {
     }
     logout = (e) => {
         localStorage.removeItem("token")
+        // localStorage.removeItem("userid")
+
         this.setState({
             loggedIn: false
         })
@@ -92,6 +97,7 @@ export default class Dashboard extends Component {
         if (this.state.loggedIn === false) {
             return <Redirect to='/hospital/login/'> </Redirect>
         }
+
 
 
 
