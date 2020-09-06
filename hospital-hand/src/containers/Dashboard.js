@@ -5,31 +5,27 @@ import DashboardHome from './DashboardHome'
 import DashboardDoctor from './DashboardDoctor'
 import DashboardPatient from './DashboardPatient'
 import Axios from 'axios'
-
+import Authenticated from '../api/Authenticated'
 
 
 export default class Dashboard extends Component {
 
-    state = {
-        appointments: []
-    }
+    // componentDidMount() {
+    //     const token = localStorage.getItem("token")
+    //     console.log(token)
 
-    componentDidMount() {
-        const token = localStorage.getItem("token")
-        console.log(token)
+    //     Axios.get(`http://127.0.0.1:8000/appointment/hospital/${token}`)
+            // .then((appointments) => {
+            //     this.setState({
+            //         appointments: appointments.data,
 
-        Axios.get(`http://127.0.0.1:8000/appointment/hospital/${token}`)
-            .then((appointments) => {
-                this.setState({
-                    appointments: appointments.data,
-
-                })
-                console.log(appointments.data);
+            //     })
+            //     console.log(appointments.data);
 
 
 
-            })
-    }
+            // })
+    // }
 
     constructor(props) {
         super(props)
@@ -44,9 +40,27 @@ export default class Dashboard extends Component {
             isAppointment: false,
             isnotice: false,
             loggedIn,
-            userId:this.props.userId
+            userId:'',
+            appointments: []
             // departments:''
         }
+        Authenticated.get('/user/',null).then(
+            (response) => {
+                this.setState({userId:response.data[0].id})
+            } 
+        ).catch(
+            (error)=>{
+                console.log(error)
+            }
+        )
+        Authenticated.get(`/appointment/hospital/${this.state.userId}`).then((appointments) => {
+            this.setState({
+                appointments: appointments.data,
+
+            })
+            console.log(appointments.data);
+        })
+
     };
     doctorProfile = (e) => {
         this.setState({
