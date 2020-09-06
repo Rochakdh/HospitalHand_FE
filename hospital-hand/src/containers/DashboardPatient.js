@@ -53,6 +53,9 @@ export default class DashboardPatient extends Component {
 
         const { updateapproveOpen, appointment_date, appointment_time, doctor_requested, fixed_appointment, id } = this.state
 
+        const userid = localStorage.getItem("userid")
+
+
 
 
 

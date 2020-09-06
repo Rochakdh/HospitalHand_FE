@@ -15,26 +15,28 @@ export default class Dashboard extends Component {
     }
 
     componentDidMount() {
-        const token = localStorage.getItem("token")
-        console.log(token)
-
-        Axios.get(`http://127.0.0.1:8000/appointment/hospital/${token}`)
-            .then((appointments) => {
-                this.setState({
-                    appointments: appointments.data,
-
-                })
-                console.log(appointments.data);
+       const userid= localStorage.getItem("userid", userid)
 
 
+        // Axios.get(`http://127.0.0.1:8000/appointment/hospital/${userid}`)
+        //     .then((appointments) => {
+        //         this.setState({
+        //             appointments: appointments.data,
 
-            })
+        //         })
+        //         console.log(appointments.data);
+
+
+
+        //     })
+
     }
 
     constructor(props) {
         super(props)
         let loggedIn = true
         let token = localStorage.getItem('token')
+        // let userid = localStorage.getItem('userid')
         if (token === null) {
             loggedIn = false
         }
@@ -70,6 +72,8 @@ export default class Dashboard extends Component {
     }
     logout = (e) => {
         localStorage.removeItem("token")
+        // localStorage.removeItem("userid")
+
         this.setState({
             loggedIn: false
         })
@@ -78,6 +82,7 @@ export default class Dashboard extends Component {
         if (this.state.loggedIn === false) {
             return <Redirect to='/hospital/login/'> </Redirect>
         }
+
 
 
 
