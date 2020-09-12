@@ -6,6 +6,7 @@ import DashboardDoctor from './DashboardDoctor'
 import DashboardPatient from './DashboardPatient'
 import Axios from 'axios'
 import Authenticated from '../api/Authenticated'
+import DashboardNotice from './DashboardNotice'
 
 
 export default class Dashboard extends Component {
@@ -23,13 +24,13 @@ export default class Dashboard extends Component {
             isHome: true,
             isDoctor: false,
             isAppointment: false,
-            isnotice: false,
+            isNotice: false,
             loggedIn,
-            userId:'',
+            userId: '',
             appointments: []
             // departments:''
         }
-    
+
         Authenticated.get('/appointment/hospital/').then((response) => {
             this.setState({
                 appointments: response.data,
@@ -55,7 +56,19 @@ export default class Dashboard extends Component {
         this.setState({
             isAppointment: true,
             isHome: false,
-            isDoctor: false
+            isDoctor: false,
+            isNotice: false
+        })
+
+
+    }
+
+    noticeProfile = (e) => {
+        this.setState({
+            isAppointment: false,
+            isHome: false,
+            isDoctor: false,
+            isNotice: true
         })
 
 
@@ -69,14 +82,14 @@ export default class Dashboard extends Component {
         })
     }
 
-    onPatientDelete = (index)=>{
+    onPatientDelete = (index) => {
         this.setState(prevState => {
             const appointments = prevState.appointments.filter(appointment => appointment.id !== index);
             return { appointments };
         });
         console.log(this.state.appointments)
     }
-      
+
     render() {
         if (this.state.loggedIn === false) {
             return <Redirect to='/hospital/login/'> </Redirect>
@@ -116,6 +129,10 @@ export default class Dashboard extends Component {
                                     <Icon name='suitcase' />
                                     Appointment
                                 </Menu.Item>
+                                <Menu.Item as='a' onClick={this.noticeProfile}>
+                                    <Icon name='book' />
+                                    Notices
+                                </Menu.Item>
                             </Sidebar>
                         </div>
                         <div className="col-md-10 side-bar-right">
@@ -128,7 +145,7 @@ export default class Dashboard extends Component {
                                 </nav>
                             </div>
                             {/* {(this.state.isHome) ?  )} */}
-                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : <DashboardPatient patients={this.state.appointments} onPatientDelete={this.onPatientDelete}/>}
+                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : (this.state.isNotice) ? <DashboardNotice /> : <DashboardPatient patients={this.state.appointments} onPatientDelete={this.onPatientDelete} />}
 
                         </div>
                     </div>
