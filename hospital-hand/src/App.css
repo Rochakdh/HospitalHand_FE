@@ -4,7 +4,7 @@ ul, li{
 }
 .backgroundImage{
     background: url(containers/hospitalhand.jpg);
-	height: 540px;
+	height: 610px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -12,7 +12,7 @@ ul, li{
 .bgColor{
     background-color: rgba(30,76,92,0.8);;
 	margin:0px;
-    height:540px;
+    height:610px;
 }
 nav{
     display: flex;

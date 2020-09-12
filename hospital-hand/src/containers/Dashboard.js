@@ -30,13 +30,14 @@ export default class Dashboard extends Component {
             // departments:''
         }
     
-        Authenticated.get(`/appointment/hospital/}`).then((appointments) => {
+        Authenticated.get('/appointment/hospital/').then((response) => {
             this.setState({
-                appointments: appointments.data,
+                appointments: response.data,
 
             })
-            console.log(appointments.data);
+            console.log(response.data);
         })
+        this.onPatientDelete = this.onPatientDelete.bind(this)
 
     };
     doctorProfile = (e) => {
@@ -67,6 +68,15 @@ export default class Dashboard extends Component {
             loggedIn: false
         })
     }
+
+    onPatientDelete = (index)=>{
+        this.setState(prevState => {
+            const appointments = prevState.appointments.filter(appointment => appointment.id !== index);
+            return { appointments };
+        });
+        console.log(this.state.appointments)
+    }
+      
     render() {
         if (this.state.loggedIn === false) {
             return <Redirect to='/hospital/login/'> </Redirect>
@@ -118,10 +128,7 @@ export default class Dashboard extends Component {
                                 </nav>
                             </div>
                             {/* {(this.state.isHome) ?  )} */}
-                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : <DashboardPatient data={this.state.appointments} />}
-
-
-
+                            {(this.state.isHome) ? <DashboardHome /> : (this.state.isDoctor) ? <DashboardDoctor /> : <DashboardPatient patients={this.state.appointments} onPatientDelete={this.onPatientDelete}/>}
 
                         </div>
                     </div>

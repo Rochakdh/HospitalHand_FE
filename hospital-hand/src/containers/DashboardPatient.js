@@ -2,18 +2,23 @@ import React, { Component } from 'react'
 import { Input, Table, Icon, Button } from 'semantic-ui-react'
 import ModalExampleBasic from './Approve'
 import ModalExampleScrollingContent from './DashboardPatientDetail'
-import Axios from 'axios'
+import Axios from '../api/Authenticated'
 import Approve from './Approve'
 const color = 'teal'
 
 export default class DashboardPatient extends Component {
 
-    state = {
-        data: this.props.data,
+    constructor(props){
+        super(props)
+        this.state = {
+            patients: this.props.patients,
+            updateapproveOpen: false
+    
+        }
 
-        updateapproveOpen: false
-
+        console.log(this.props.patients)
     }
+    
 
 
     approveOpen = (id, fixed_appointment, appointment_date, appointment_time, doctor_requested) => {
@@ -23,8 +28,6 @@ export default class DashboardPatient extends Component {
             doctor_requested: doctor_requested,
             id: id,
             fixed_appointment: fixed_appointment,
-
-
             updateapproveOpen: true
         })
 
@@ -37,28 +40,26 @@ export default class DashboardPatient extends Component {
     }
 
     deleteAppointment = (id) => {
-        Axios.delete(`http://127.0.0.1:8000/appointment/profile/delete/${id}`)
+        Axios.delete(`/appointment/profile/delete/${id}`)
             .then((response) => {
-
-
                 alert('Appointment Deleted')
-                window.location.reload()
-
-
-
+                console.log(response)
+                this.props.onPatientDelete(id)
             })
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.patients !== this.props.patients){
+            this.setState({          
+                patients: this.props.patients
+            });
+        }
     }
 
     render() {
 
         const { updateapproveOpen, appointment_date, appointment_time, doctor_requested, fixed_appointment, id } = this.state
-
         const userid = localStorage.getItem("userid")
-
-
-
-
-
         return (
             <>
                 <div className="hospital-work">
@@ -78,7 +79,7 @@ export default class DashboardPatient extends Component {
 
                         <Table.Body>
                             {
-                                this.state.data.map(appoint =>
+                                this.state.patients.map(appoint =>
                                     <Table.Row >
                                         <Table.Cell>{appoint.patient_name}</Table.Cell>
                                         <Table.Cell>{appoint.doctor_requested}</Table.Cell>

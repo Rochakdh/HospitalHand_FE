@@ -3,20 +3,22 @@ import { Input, Table, Icon, Button } from 'semantic-ui-react'
 import DashboardAddDoctor from './DashboardAddDoctor'
 import DashboardDoctorAppointmentDetail from './DashboardDoctorAppointmentDetail'
 import setup from '../api/setup'
+import Authenticated from '../api/Authenticated'
 
 const color = "teal"
 
 
 export default class DashboardDoctor extends Component {
 
-    state = {
-        isAddOpen: false,
-        allDepartment: [],
-        userId:this.props.userId,
-
-    }
-
-    componentDidMount() {
+    constructor(props){
+        super(props)
+        this.state = {
+            isAddOpen: false,
+            allDepartment: [],
+            userId:this.props.userId,
+            doctordetail:[],
+    
+        }
         setup.get('/categories/alldepartment/', null)
             .then((response) => {
                 this.setState({
@@ -27,10 +29,18 @@ export default class DashboardDoctor extends Component {
             .catch((error) => {
                 console.log(error)
             });
-
-
+        Authenticated.get('/categories/list/',null)
+        .then((response) => {
+            console.log(response.data)
+            this.setState({
+                doctordetail:response.data
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+        
     }
-
 
     AddDoctorOpen = () => {
         this.setState({
@@ -70,18 +80,21 @@ export default class DashboardDoctor extends Component {
                                 <Table.HeaderCell>Doctor</Table.HeaderCell>
                                 <Table.HeaderCell>Email</Table.HeaderCell>
                                 <Table.HeaderCell>Phone No.</Table.HeaderCell>
-                                <Table.HeaderCell>Status</Table.HeaderCell>
+                                <Table.HeaderCell>Experience</Table.HeaderCell>
+                                <Table.HeaderCell>Department</Table.HeaderCell>
                                 <Table.HeaderCell>See Appointment</Table.HeaderCell>
                                 <Table.HeaderCell>Action</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
+                        {this.state.doctordetail.map(doctor=>
                         <Table.Body>
                             <Table.Row>
-                                <Table.Cell>Prerit</Table.Cell>
-                                <Table.Cell>2011-10-10</Table.Cell>
-                                <Table.Cell>No</Table.Cell>
-                                <Table.Cell>Prerit</Table.Cell>
+                                <Table.Cell>{doctor.name}</Table.Cell>
+                                <Table.Cell>{doctor.email}</Table.Cell>
+                                <Table.Cell>{doctor.contact_number}</Table.Cell>
+                                <Table.Cell>{doctor.experience}</Table.Cell>
+                                <Table.Cell>{doctor.department}</Table.Cell>
                                 <Table.Cell><DashboardDoctorAppointmentDetail /></Table.Cell>
                                 <Table.Cell>
                                     <Button circular color='yellow' icon='edit' />
@@ -89,6 +102,7 @@ export default class DashboardDoctor extends Component {
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>
+                        )}
                     </Table>
                 </div>
             </>
