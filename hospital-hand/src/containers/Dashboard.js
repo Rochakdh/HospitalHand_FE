@@ -121,10 +121,10 @@ export default class Dashboard extends Component {
                                     <Icon name='doctor' />
                                     Doctor
                                 </Menu.Item>
-                                <Menu.Item as='a'>
+                                {/* <Menu.Item as='a'>
                                     <Icon name='hospital' />
                                     Patients
-                                </Menu.Item>
+                                </Menu.Item> */}
                                 <Menu.Item as='a' onClick={this.appointmentProfile}>
                                     <Icon name='suitcase' />
                                     Appointment
