@@ -18,7 +18,7 @@ class List extends React.Component {
 
     notice: [],
     isDetailOpen: false,
-    isUpdateOpen: false
+    // isUpdateOpen: false
   };
 
   componentDidMount() {
@@ -42,15 +42,15 @@ class List extends React.Component {
 
 
   }
-  update_data() {
-    this.setState({ isUpdateOpen: true })
-  }
+  // update_data() {
+  //   this.setState({ isUpdateOpen: true })
+  // }
 
-  del_data(id) {
-    console.log(id);
-    axios.delete(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then(window.location.reload())
+  // del_data(id) {
+  //   console.log(id);
+  //   axios.delete(`http://localhost:8000/notice/update_delete/${id}/`, this.state).then(window.location.reload())
 
-  };
+  // };
   onDetailClose = () => {
     this.setState({
       isDetailOpen: false,
@@ -95,8 +95,9 @@ class List extends React.Component {
 
                   <button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description)} > Detail</button>
 
-                  <button type="submit" onClick={this.update_data}>Update</button>
-                  <button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</button></td>
+                  {/* <button type="submit" onClick={this.update_data}>Update</button> */}
+                  {/* <button type="submit" onClick={this.del_data.bind(this, notice.id)}>Delete</button> */}
+                </td>
               </tr>
             ))}
           </tbody>
