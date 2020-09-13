@@ -21,6 +21,8 @@ import Notice from './containers/Notice.jsx'
 import DetailNotice from './containers/DetailNotice'
 import List from './containers/Noticelist'
 import UpdateNoticeForm from './containers/UpdateNoticeForm.jsx'
+import AdminDashBoard from './containers/AdminDashBoard';
+import AdminDashBoardHome from './containers/AdminDashBoardHome';
 
 
 
@@ -76,6 +78,8 @@ export default class App extends Component {
         <Route exact path='/detailnotice/' component={DetailNotice}></Route>
         <Route exact path='/notices/' component={List}></Route>
         <Route exact path='/updatenotice/' component={UpdateNoticeForm}></Route>
+        <Route exact path='/admin/login' component={AdminDashBoard}></Route>
+        <Route exact path='/admin/' component={AdminDashBoardHome}></Route>
 
       </Router>
 

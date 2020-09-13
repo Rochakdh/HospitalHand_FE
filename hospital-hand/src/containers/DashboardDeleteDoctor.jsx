@@ -15,8 +15,8 @@ export default class DashboardDeleteDoctor extends Component {
             .then((response) => {
 
 
-                alert('Doctor Deleted')
-                window.location.reload()
+                // alert('Doctor Deleted')
+                // window.location.reload()
 
 
 

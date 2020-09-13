@@ -426,3 +426,11 @@ nav{
     padding: 0px;
     margin-bottom: 30px;
 }
+.backgroundImageAdmin{
+    background: url(containers/admin.jpg);
+	height: 610px;
+    /* background-position: center; */
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}

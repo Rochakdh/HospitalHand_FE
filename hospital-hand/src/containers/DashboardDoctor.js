@@ -12,10 +12,7 @@ const color = "teal"
 
 export default class DashboardDoctor extends Component {
 
-    state = {
-        updateDoctorOpen: false,
-        deleteDoctorOpen: true
-    }
+  
 
     constructor(props) {
         super(props)
@@ -24,6 +21,8 @@ export default class DashboardDoctor extends Component {
             allDepartment: [],
             userId: this.props.userId,
             doctordetail: [],
+            updateDoctorOpen: false,
+            deleteDoctorOpen: true
 
         }
         setup.get('/categories/alldepartment/', null)
@@ -36,6 +35,7 @@ export default class DashboardDoctor extends Component {
             .catch((error) => {
                 console.log(error)
             });
+
         Authenticated.get('/categories/list/', null)
             .then((response) => {
                 console.log(response.data)
@@ -43,7 +43,6 @@ export default class DashboardDoctor extends Component {
                     doctordetail: response.data
                 })
             })
-        })
         .catch((error) => {
             console.log(error)
         });
@@ -111,6 +110,19 @@ export default class DashboardDoctor extends Component {
         });
     }
 
+    componentDidUpdate(prevProps){
+        Authenticated.get('/categories/list/', null)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    doctordetail: response.data
+                })
+            })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
 
     render() {
         const { allDepartment, isAddOpen, updateDoctorOpen, id, name, contact_number, experience, department, email } = this.state
@@ -118,14 +130,10 @@ export default class DashboardDoctor extends Component {
             <>
                 <div className="hospital-work">
                     <h3>Doctor List</h3>
-<<<<<<< HEAD
-                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList} />
-=======
-                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} />
-                    <DashboardUpdateDoctor id={id} name={name} contact_number={contact_number} experience={experience} department={department} email={email} onClose={this.onUpdateClose} isUpdateOpen={updateDoctorOpen} allDepartment={allDepartment} />
-                    <DashboardDeleteDoctor deleteDoctorOpen={this.state.deleteDoctorOpen} onClose={this.onCloseDeleteDoctor} id={id} ></DashboardDeleteDoctor>
+                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList}/>
+                    <DashboardUpdateDoctor id={id} name={name} contact_number={contact_number} experience={experience} department={department} email={email} onClose={this.onUpdateClose} isUpdateOpen={updateDoctorOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList}/>
+                    <DashboardDeleteDoctor deleteDoctorOpen={this.state.deleteDoctorOpen} onClose={this.onCloseDeleteDoctor} id={id} updateDoctorList={this.updateDoctorList}></DashboardDeleteDoctor>
 
->>>>>>> 80e9150d96a7756a6e0293887d7955a1316ab49b
                     <Button
                         onClick={this.AddDoctorOpen}
                         floated='right'
