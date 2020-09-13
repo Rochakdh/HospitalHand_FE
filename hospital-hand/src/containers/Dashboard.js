@@ -68,7 +68,7 @@ export default class Dashboard extends Component {
             loggedIn: false
         })
     }
-
+ 
     onPatientDelete = (index)=>{
         this.setState(prevState => {
             const appointments = prevState.appointments.filter(appointment => appointment.id !== index);

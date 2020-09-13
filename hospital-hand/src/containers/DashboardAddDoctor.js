@@ -50,12 +50,16 @@ export default class DashboardAddDoctor extends Component {
             (response)=>{
             alert("Succesfully Created")
             this.props.onClose()
+            this.props.updateDoctorList()
         }).catch((error)=>{
                 console.log(error)
             }
             // console.log(error.response.data)
             // console.log(this.state.department)
         )};
+    
+    
+    
         
 
     

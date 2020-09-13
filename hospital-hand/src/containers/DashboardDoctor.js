@@ -39,7 +39,8 @@ export default class DashboardDoctor extends Component {
         .catch((error) => {
             console.log(error)
         });
-        
+
+        this.updateDoctorList = this.updateDoctorList.bind(this)
     }
 
     AddDoctorOpen = () => {
@@ -54,6 +55,19 @@ export default class DashboardDoctor extends Component {
             isAddOpen:false
         })
     }
+    updateDoctorList =() =>{
+        Authenticated.get('/categories/list/',null)
+        .then((response) => {
+            console.log(response.data)
+            this.setState({
+                doctordetail:response.data
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
 
     render() {
         const { allDepartment, isAddOpen } = this.state
@@ -61,7 +75,7 @@ export default class DashboardDoctor extends Component {
             <>
                 <div className="hospital-work">
                     <h3>Doctor List</h3>
-                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} />
+                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList} />
                     <Button
                         onClick={this.AddDoctorOpen}
                         floated='right'
