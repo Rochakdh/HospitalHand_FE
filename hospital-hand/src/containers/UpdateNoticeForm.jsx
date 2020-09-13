@@ -1,103 +1,93 @@
-import React from "react";
-import { Button, Form, FormGroup, Input, Label } from "semantic-ui-react";
-
-// import {DatePicker,useState}  from "react-datepicker";
-
+import React, { Component } from 'react'
+import { Button, Form, FormGroup, Input, Label, TextArea } from 'semantic-ui-react';
 import axios from "axios";
 
-import { API_URL1 } from "../constants/index";
-import { Modal } from "semantic-ui-react";
+import { Modal } from 'semantic-ui-react'
 
 
-export default class UpdateNoticeForm extends React.Component {
-    state = {
-      title: "",
-      description: "",
-      post_at: "",
-      notice:[]
-    };
-  
-    componentDidMount() {
-      if (this.props.notice) {
-        const { title, description, post_at } = this.props.notice;
-        this.setState({ title, description, post_at });
-      }
-      axios.get(`http://localhost:8000/notice/update_delete/8/`).then(res => {
-            this.setState({ notice: res.data })})
-            // .then(this.setState({
-            //     title:this.state.notice.title
-            // }))
-    }
-  
-    onChange = e => {
-      this.setState({ [e.target.name]: e.target.value });
-    };
-    // get_notice =e =>{
-    //     e.preventDefault();
-    //     axios.get(`http://localhost:8000/notice/update_delete/${id}/`).then(res => {
-    //         this.setState({ notice: res.data }).then(this.setState({
-    //             title=this.state.notice.title
-    //         }))
-    // })
-    up_notice = e => {
-      e.preventDefault();
-      axios.put(`http://localhost:8000/notice/update_delete/8/`, this.state).then(() => {
-        // this.props.resetState();
-        
-      });
-    };
-  
-    
-    defaultIfEmpty = value => {
-      return value === "" ? "" : value;
-    };
-  
-    onCloseClick(){
-      this.props.onUpdateClose()
-    }
-
-    render() {
-      const { isUpdateOpen }=this.props;
-      const { onUpdateClose}= this.props;
-      return (
-        <Modal open={isUpdateOpen} onClose={this.onCloseClick}>
-          <Modal.Header>Update Notice</Modal.Header>
-          <Modal.Content>
-        <Form onSubmit={this.up_notice}>
-          <FormGroup>
-            <Label for="title">Title:</Label>
-            <Input
-              type="text"
-              name="title"
-              onChange={this.onChange}
-              value={this.defaultIfEmpty(this.state.title)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="description">Description:</Label>
-            <Input
-              type="text"
-              name="description"
-              onChange={this.onChange}
-              value={this.defaultIfEmpty(this.state.description)}
-            />
-          </FormGroup>
-          
-          <FormGroup>
-            <Label for="post_at">Post at:</Label>
-            <Input
-              type="date"
-              name="post_at"
-              onChange={this.onChange}
-              value={this.defaultIfEmpty(this.state.post_at)}
-            />
-          </FormGroup>
-          <Button onClick={this.up_notice} content="Submit" type="submit">Update</Button>
-        </Form>
-        </Modal.Content>
-        </Modal>
-      );
-    }
+export default class UpdateNoticeForm extends Component {
+  state = {
+    id: this.props.id
   }
 
-  
+  onClose = () => {
+    this.props.onUpdateClose()
+    console.log(this.props.id)
+
+
+  }
+  onChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+      id: this.props.id
+    });
+  };
+
+
+  up_notice = (e) => {
+    e.preventDefault();
+    axios.patch(`http://127.0.0.1:8000/notice/notice/update_delete/${this.state.id}`, this.state)
+      .then((response) => {
+        if (response.status === 200) {
+          alert('Notice Updated! ')
+          window.location.reload()
+        }
+      })
+  }
+
+  render() {
+    const modalStyle = {
+      marginLeft: 18 + "em",
+      marginTop: 7 + "em",
+      height: 'auto',
+
+    };
+    const { isUpdateOpen } = this.props
+    const { id, title, description, post_at } = this.props
+    return (
+      <div>
+        <Modal style={modalStyle} open={isUpdateOpen} onClose={this.onClose}>
+          <Modal.Header>{title}</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <Form onSubmit={this.up_notice}>
+                <FormGroup>
+                  <Label for="title">Title:</Label>
+                  <Input
+                    type="text"
+                    name="title"
+                    onChange={this.onChange}
+                    defaultValue={title}
+                  />
+
+                </FormGroup>
+                <FormGroup>
+                  <Label for="description">Description:</Label>
+                  <TextArea
+                    type="text"
+                    name="description"
+                    onChange={this.onChange}
+                    defaultValue={description}
+                  />
+
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="post_at">Post at:</Label>
+                  <Input
+                    type="date"
+                    name="post_at"
+                    onChange={this.onChange}
+                    defaultValue={post_at}
+                  />
+
+                </FormGroup>
+                <Button type="submit">Update</Button>
+              </Form>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
+      </div >
+    )
+  }
+}

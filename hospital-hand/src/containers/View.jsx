@@ -38,8 +38,6 @@ export default class View extends Component {
                 })
                 console.log(docs.data);
 
-
-
             })
 
     }
