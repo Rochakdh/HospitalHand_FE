@@ -6,6 +6,7 @@ import setup from '../api/setup'
 import Authenticated from '../api/Authenticated'
 import DashboardUpdateDoctor from './DashboardUpdateDoctor'
 import DashboardDeleteDoctor from './DashboardDeleteDoctor'
+import Axios from 'axios'
 
 const color = "teal"
 
@@ -22,7 +23,9 @@ export default class DashboardDoctor extends Component {
             userId: this.props.userId,
             doctordetail: [],
             updateDoctorOpen: false,
-            deleteDoctorOpen: true
+            deleteDoctorOpen: true,
+            doctorAppointment: []
+
 
         }
         setup.get('/categories/alldepartment/', null)
@@ -97,17 +100,38 @@ export default class DashboardDoctor extends Component {
             deleteDoctorOpen: false
         })
     }
-    updateDoctorList =() =>{
-        Authenticated.get('/categories/list/',null)
-        .then((response) => {
-            console.log(response.data)
-            this.setState({
-                doctordetail:response.data
+    updateDoctorList = () => {
+        Authenticated.get('/categories/list/', null)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    doctordetail: response.data
+                })
             })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+    doctorAppointments = (id) => {
+        this.setState({
+            doctor_id: id,
+            doctorAppointmentOpen: true
         })
-        .catch((error) => {
-            console.log(error)
-        });
+        Axios.get(`http://127.0.0.1:8000/appointment/doctor/${id}`)
+            .then((appointment) => {
+                this.setState({
+                    doctorAppointment: appointment.data
+                })
+                console.log(this.state.doctorAppointment)
+
+            })
+    }
+
+    onAppDetailClose = () => {
+        this.setState({
+            doctorAppointmentOpen: false
+        })
     }
 
     componentDidUpdate(prevProps){
@@ -125,14 +149,17 @@ export default class DashboardDoctor extends Component {
 
 
     render() {
-        const { allDepartment, isAddOpen, updateDoctorOpen, id, name, contact_number, experience, department, email } = this.state
+        const { doctor_id, allDepartment, isAddOpen, updateDoctorOpen, id, name, contact_number, experience, department, email } = this.state
+        const { data } = this.state.doctorAppointment
         return (
             <>
                 <div className="hospital-work">
                     <h3>Doctor List</h3>
-                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList}/>
-                    <DashboardUpdateDoctor id={id} name={name} contact_number={contact_number} experience={experience} department={department} email={email} onClose={this.onUpdateClose} isUpdateOpen={updateDoctorOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList}/>
-                    <DashboardDeleteDoctor deleteDoctorOpen={this.state.deleteDoctorOpen} onClose={this.onCloseDeleteDoctor} id={id} updateDoctorList={this.updateDoctorList}></DashboardDeleteDoctor>
+                    <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList} />
+                    <DashboardUpdateDoctor id={id} name={name} contact_number={contact_number} experience={experience} department={department} email={email} onClose={this.onUpdateClose} isUpdateOpen={updateDoctorOpen} allDepartment={allDepartment} />
+                    <DashboardDeleteDoctor deleteDoctorOpen={this.state.deleteDoctorOpen} onClose={this.onCloseDeleteDoctor} id={id} ></DashboardDeleteDoctor>
+                    <DashboardDoctorAppointmentDetail doctorAppointment={this.state.doctorAppointment} onClose={this.onAppDetailClose} doctorAppointmentOpen={this.state.doctorAppointmentOpen} id={doctor_id} />
+
 
                     <Button
                         onClick={this.AddDoctorOpen}
@@ -167,7 +194,9 @@ export default class DashboardDoctor extends Component {
                                     <Table.Cell>{doctor.contact_number}</Table.Cell>
                                     <Table.Cell>{doctor.experience}</Table.Cell>
                                     <Table.Cell>{doctor.department}</Table.Cell>
-                                    <Table.Cell><DashboardDoctorAppointmentDetail /></Table.Cell>
+                                    <Table.Cell>
+                                        <Button onClick={this.doctorAppointments.bind(this, doctor.id)} color='blue'>Appointments</Button>
+                                    </Table.Cell>
                                     <Table.Cell>
 
                                         <Button onClick={this.updateDoctor.bind(this, doctor.id, doctor.name, doctor.email, doctor.contact_number, doctor.experience, doctor.department)} circular color='yellow' icon='edit' />

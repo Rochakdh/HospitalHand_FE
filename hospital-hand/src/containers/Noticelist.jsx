@@ -83,6 +83,7 @@ class List extends React.Component {
           <thead>
             <tr>
               <th>Title</th>
+              <th>Date posted</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -91,6 +92,8 @@ class List extends React.Component {
 
               <tr selectable textAlign="center" key={notice.id}>
                 <td data-label="Title" >{notice.title}</td>
+                <td data-label="Date" >{notice.post_at}</td>
+
                 <td data-label="Action">
 
                   <button type="submit" onClick={this.detail_data.bind(this, notice.id, notice.title, notice.description)} > Detail</button>

@@ -122,7 +122,7 @@ export default class ProfileTable extends Component {
                                     <Table.Cell>{app.select_hospital}</Table.Cell>
                                     <Table.Cell>{app.appointment_date}</Table.Cell>
                                     <Table.Cell>{app.appointment_time}</Table.Cell>
-                                    <Table.Cell>{(app.fixed_appointment) ? 'Approved' : 'Unapproved'}</Table.Cell>
+                                    <Table.Cell>{(app.fixed_appointment) ? <h3>Yes</h3> : <h3>No</h3>}</Table.Cell>
                                     <Table.Cell>
 
                                         <Button onClick={this.updateAppointment.bind(this, app.id, app.patient_name, app.doctor_requested, app.select_hospital, app.patient_problem_description, app.medicines_taken)}>
