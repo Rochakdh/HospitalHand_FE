@@ -7,19 +7,19 @@ const color = "teal"
 
 
 export default class DashboardDoctorAppointmentDetail extends Component {
-  state = {
-    doctorAppointment: []
-  }
+  
 
-  componentDidMount() {
-    Axios.get(`http://127.0.0.1:8000/appointment/doctor/${this.props.id}`)
-      .then((appointment) => {
-        this.setState({
-          doctorAppointment: appointment.data
-        })
-      })
+  // componentDidMount() {
+  //   Axios.get(`http://127.0.0.1:8000/appointment/doctor/${this.props.id}`)
+  //     .then((appointment) => {
+  //       this.setState({
+  //         doctorAppointment: appointment.data
+  //       })
+  //     })
 
-  }
+  //   console.log(this.state.doctorAppointment)
+
+  // }
 
   render() {
     return (
@@ -37,6 +37,8 @@ export default class DashboardDoctorAppointmentDetail extends Component {
               <Table.Row>
                 <Table.HeaderCell >Patient Name</Table.HeaderCell>
                 <Table.HeaderCell> Appointment Time</Table.HeaderCell>
+                <Table.HeaderCell> Appointment Date</Table.HeaderCell>
+
 
               </Table.Row>
             </Table.Header>
@@ -44,11 +46,13 @@ export default class DashboardDoctorAppointmentDetail extends Component {
 
             <Table.Body>
               {
-                this.state.doctorAppointment.map(app =>
+                this.props.doctorAppointment.map(app =>
 
                   <Table.Row >
                     <Table.Cell>{app.patient_name}</Table.Cell>
                     <Table.Cell>{app.appointment_time}</Table.Cell>
+                    <Table.Cell>{app.appointment_date}</Table.Cell>
+
 
                   </Table.Row>
 

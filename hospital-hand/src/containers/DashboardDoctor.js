@@ -27,6 +27,8 @@ export default class DashboardDoctor extends Component {
             allDepartment: [],
             userId: this.props.userId,
             doctordetail: [],
+            doctorAppointment: []
+
 
         }
         setup.get('/categories/alldepartment/', null)
@@ -119,12 +121,14 @@ export default class DashboardDoctor extends Component {
             doctor_id: id,
             doctorAppointmentOpen: true
         })
-        // Axios.get(`http://127.0.0.1:8000/appointment/doctor/${id}`)
-        //     .then((appointment) => {
-        //         this.setState({
-        //             doctorAppointment: appointment.data
-        //         })
-        //     })
+        Axios.get(`http://127.0.0.1:8000/appointment/doctor/${id}`)
+            .then((appointment) => {
+                this.setState({
+                    doctorAppointment: appointment.data
+                })
+                console.log(this.state.doctorAppointment)
+
+            })
     }
 
     onAppDetailClose = () => {
@@ -136,6 +140,7 @@ export default class DashboardDoctor extends Component {
 
     render() {
         const { doctor_id, allDepartment, isAddOpen, updateDoctorOpen, id, name, contact_number, experience, department, email } = this.state
+        const { data } = this.state.doctorAppointment
         return (
             <>
                 <div className="hospital-work">
@@ -143,7 +148,7 @@ export default class DashboardDoctor extends Component {
                     <DashboardAddDoctor onClose={this.onAddClose} isAddOpen={isAddOpen} allDepartment={allDepartment} updateDoctorList={this.updateDoctorList} />
                     <DashboardUpdateDoctor id={id} name={name} contact_number={contact_number} experience={experience} department={department} email={email} onClose={this.onUpdateClose} isUpdateOpen={updateDoctorOpen} allDepartment={allDepartment} />
                     <DashboardDeleteDoctor deleteDoctorOpen={this.state.deleteDoctorOpen} onClose={this.onCloseDeleteDoctor} id={id} ></DashboardDeleteDoctor>
-                    <DashboardDoctorAppointmentDetail onClose={this.onAppDetailClose} doctorAppointmentOpen={this.state.doctorAppointmentOpen} id={doctor_id} />
+                    <DashboardDoctorAppointmentDetail doctorAppointment={this.state.doctorAppointment} onClose={this.onAppDetailClose} doctorAppointmentOpen={this.state.doctorAppointmentOpen} id={doctor_id} />
 
 
                     <Button
